@@ -1,0 +1,8 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/SolutionDownloaderCore/src/Pg.SolutionDownloaderCore/.vs/Pg.SolutionDownloaderCore
+/SolutionDownloaderCore/src/Pg.SolutionDownloaderCore/Pg.SolutionDownloaderCore/bin/Debug/net7.0
+/SolutionDownloaderCore/src/Pg.SolutionDownloaderCore/Pg.SolutionDownloaderCore/obj/Debug/net7.0/ref/Pg.SolutionDownloaderCore.dll
+/SolutionDownloaderCore/src/Pg.SolutionDownloaderCore/Pg.SolutionDownloaderCore/obj
