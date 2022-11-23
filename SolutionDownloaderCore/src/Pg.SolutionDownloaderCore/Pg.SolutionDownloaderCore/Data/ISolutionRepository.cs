@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Crm.Sdk.Messages;
 
 namespace Pg.SolutionDownloaderCore.Data
 {
     public interface ISolutionRepository
     {
+        ExportSolutionResponse Get(string name, bool isManaged); 
     }
 }

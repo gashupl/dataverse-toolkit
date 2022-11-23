@@ -14,9 +14,16 @@ namespace Pg.SolutionDownloaderCore.Services
             _logger = loggerFactory.CreateLogger<SolutionService>();
         }
 
-        public void Get()
+        public void DownloadSolution(string outputDir, string name, bool isManaged)
         {
-            _logger.LogTrace("Getting solution ready..."); 
+            _logger.LogTrace("Getting solution ready...");
+            var response = _repository.Get(name, isManaged); 
+            if(response != null) 
+            {
+                byte[] exportXml = response.ExportSolutionFile;
+                string filename = name + ".zip";
+                File.WriteAllBytes(outputDir + filename, exportXml);
+            }
         }
     }
 }

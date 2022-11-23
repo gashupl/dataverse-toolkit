@@ -8,5 +8,6 @@ namespace Pg.SolutionDownloaderCore.Services
 {
     internal interface ISolutionService
     {
-        void Get(); }
+        void DownloadSolution(string outputDir, string name, bool isManaged); 
+    }
 }
