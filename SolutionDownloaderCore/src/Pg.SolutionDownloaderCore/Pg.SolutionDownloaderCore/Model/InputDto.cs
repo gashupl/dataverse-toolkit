@@ -7,6 +7,6 @@
         public string ClientSecret { get; set; }
         public string SolutionName { get; set; }
         public bool IsManaged { get; set; }
-        public string OutputDir { get; set; }
+        public string OutputDir { get; set; } = "."; 
     }
 }

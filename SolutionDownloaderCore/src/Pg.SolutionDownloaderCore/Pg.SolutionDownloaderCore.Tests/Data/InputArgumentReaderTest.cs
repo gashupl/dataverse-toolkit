@@ -1,8 +1,6 @@
 ﻿using Microsoft.Crm.Sdk.Messages;
 using Pg.SolutionDownloaderCore.Data;
 using Pg.SolutionDownloaderCore.Model;
-using Xunit;
-using static System.Net.WebRequestMethods;
 
 namespace Pg.SolutionDownloaderCore.Tests.Data
 {
@@ -13,7 +11,7 @@ namespace Pg.SolutionDownloaderCore.Tests.Data
         {
             var expected = new InputDto()
             {
-                DataverseUrl = "http:myinstance.crm4.dynamics.com",
+                DataverseUrl = "http://myinstance.crm4.dynamics.com",
                 ApplicationId = "1234",
                 ClientSecret = "09876543321",
                 SolutionName = "MySolution",
@@ -22,7 +20,7 @@ namespace Pg.SolutionDownloaderCore.Tests.Data
             }; 
 
             string[] args = new string[6]; 
-            args[0] = $"-url:http:{expected.DataverseUrl}";
+            args[0] = $"-url:{expected.DataverseUrl}";
             args[1] = $"-appId:{expected.ApplicationId}";
             args[2] = $"-clientSecret:{expected.ClientSecret}";
             args[3] = $"-solution:{expected.SolutionName}";
@@ -43,11 +41,36 @@ namespace Pg.SolutionDownloaderCore.Tests.Data
         }
 
         [Fact]
+        public void GetInput_InvalidIsManagedValue_ThrowException()
+        {
+            var expected = new InputDto()
+            {
+                DataverseUrl = "http://myinstance.crm4.dynamics.com",
+                ApplicationId = "1234",
+                ClientSecret = "09876543321",
+                SolutionName = "MySolution",
+                OutputDir = "."
+            };
+
+            string[] args = new string[6];
+            args[0] = $"-url:{expected.DataverseUrl}";
+            args[1] = $"-appId:{expected.ApplicationId}";
+            args[2] = $"-clientSecret:{expected.ClientSecret}";
+            args[3] = $"-solution:{expected.SolutionName}";
+            args[4] = $"-isManaged:TRUEE";
+            args[5] = $"-outputDir:{expected.OutputDir}";
+
+            var reader = new InputArgumentReader();
+
+            Assert.Throws<ArgumentException>(() => reader.GetInput(args));
+        }
+
+        [Fact]
         public void GetInput_ValidArgsWithoutDefaults_ReturnDto()
         {
             var expected = new InputDto()
             {
-                DataverseUrl = "http:myinstance.crm4.dynamics.com",
+                DataverseUrl = "http://myinstance.crm4.dynamics.com",
                 ApplicationId = "1234",
                 ClientSecret = "09876543321",
                 SolutionName = "MySolution",
@@ -56,7 +79,7 @@ namespace Pg.SolutionDownloaderCore.Tests.Data
             };
 
             string[] args = new string[4];
-            args[0] = $"-url:http:{expected.DataverseUrl}";
+            args[0] = $"-url:{expected.DataverseUrl}";
             args[1] = $"-appId:{expected.ApplicationId}";
             args[2] = $"-clientSecret:{expected.ClientSecret}";
             args[3] = $"-solution:{expected.SolutionName}";
@@ -79,7 +102,7 @@ namespace Pg.SolutionDownloaderCore.Tests.Data
         {
             var expected = new InputDto()
             {
-                DataverseUrl = "http:myinstance.crm4.dynamics.com",
+                DataverseUrl = "http://myinstance.crm4.dynamics.com",
                 ApplicationId = "1234",
                 ClientSecret = "09876543321",
                 SolutionName = "MySolution",
@@ -102,7 +125,7 @@ namespace Pg.SolutionDownloaderCore.Tests.Data
         {
             var expected = new InputDto()
             {
-                DataverseUrl = "http:myinstance.crm4.dynamics.com",
+                DataverseUrl = "http://myinstance.crm4.dynamics.com",
                 ApplicationId = "1234",
                 ClientSecret = "09876543321",
                 SolutionName = "MySolution",
@@ -110,11 +133,10 @@ namespace Pg.SolutionDownloaderCore.Tests.Data
                 OutputDir = "."
             };
 
-            string[] args = new string[4];
-            args[0] = $"-url:http:{expected.DataverseUrl}";
-            args[1] = $"-appId:{expected.ApplicationId}";
-            args[2] = $"-clientSecret:{expected.ClientSecret}";
-            args[3] = $"-solution:{expected.SolutionName}";
+            string[] args = new string[3];
+            args[0] = $"-url:{expected.DataverseUrl}";
+            args[1] = $"-clientSecret:{expected.ClientSecret}";
+            args[2] = $"-solution:{expected.SolutionName}";
 
             var reader = new InputArgumentReader();
             
@@ -122,11 +144,11 @@ namespace Pg.SolutionDownloaderCore.Tests.Data
         }
 
         [Fact]
-        public void GetInput_ClientSecret_ThrowException()
+        public void GetInput_MissingClientSecret_ThrowException()
         {
             var expected = new InputDto()
             {
-                DataverseUrl = "http:myinstance.crm4.dynamics.com",
+                DataverseUrl = "http://myinstance.crm4.dynamics.com",
                 ApplicationId = "1234",
                 ClientSecret = "09876543321",
                 SolutionName = "MySolution",
@@ -134,8 +156,8 @@ namespace Pg.SolutionDownloaderCore.Tests.Data
                 OutputDir = "."
             };
 
-            string[] args = new string[4];
-            args[0] = $"-url:http:{expected.DataverseUrl}";
+            string[] args = new string[3];
+            args[0] = $"-url:{expected.DataverseUrl}";
             args[1] = $"-appId:{expected.ApplicationId}";
             args[2] = $"-solution:{expected.SolutionName}";
 
@@ -149,7 +171,7 @@ namespace Pg.SolutionDownloaderCore.Tests.Data
         {
             var expected = new InputDto()
             {
-                DataverseUrl = "http:myinstance.crm4.dynamics.com",
+                DataverseUrl = "http://myinstance.crm4.dynamics.com",
                 ApplicationId = "1234",
                 ClientSecret = "09876543321",
                 SolutionName = "MySolution",
@@ -157,8 +179,8 @@ namespace Pg.SolutionDownloaderCore.Tests.Data
                 OutputDir = "."
             };
 
-            string[] args = new string[4];
-            args[0] = $"-url:http:{expected.DataverseUrl}";
+            string[] args = new string[3];
+            args[0] = $"-url:{expected.DataverseUrl}";
             args[1] = $"-appId:{expected.ApplicationId}";
             args[2] = $"-clientSecret:{expected.ClientSecret}";
 
@@ -172,7 +194,7 @@ namespace Pg.SolutionDownloaderCore.Tests.Data
         {
             var expected = new InputDto()
             {
-                DataverseUrl = "http:myinstance.crm4.dynamics.com",
+                DataverseUrl = "http://myinstance.crm4.dynamics.com",
                 ApplicationId = "1234",
                 ClientSecret = "09876543321",
                 SolutionName = "MySolution",
@@ -181,7 +203,7 @@ namespace Pg.SolutionDownloaderCore.Tests.Data
             };
 
             string[] args = new string[5];
-            args[0] = $"-url:http:{expected.DataverseUrl}";
+            args[0] = $"-url:{expected.DataverseUrl}";
             args[1] = $"-appId:{expected.ApplicationId}";
             args[2] = $"-clientSecret:{expected.ClientSecret}";
             args[3] = $"-solution:{expected.SolutionName}";
@@ -189,7 +211,7 @@ namespace Pg.SolutionDownloaderCore.Tests.Data
 
             var reader = new InputArgumentReader();
 
-            Assert.Throws<ArgumentException>(() => reader.GetInput(args));
+            Assert.Throws<ArgumentOutOfRangeException>(() => reader.GetInput(args));
         }
     }
 }
