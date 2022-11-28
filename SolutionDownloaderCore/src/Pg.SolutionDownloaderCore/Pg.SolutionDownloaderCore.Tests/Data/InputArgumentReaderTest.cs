@@ -1,6 +1,7 @@
 ﻿using Microsoft.Crm.Sdk.Messages;
 using Pg.SolutionDownloaderCore.Data;
 using Pg.SolutionDownloaderCore.Model;
+using Xunit;
 using static System.Net.WebRequestMethods;
 
 namespace Pg.SolutionDownloaderCore.Tests.Data
@@ -43,56 +44,150 @@ namespace Pg.SolutionDownloaderCore.Tests.Data
 
         public void GetInput_ValidArgsWithoutDefaults_ReturnDto()
         {
-            string[] args = new string[5];
-            args[0] = "-url:http:myinstance.crm4.dynamics.com";
-            args[1] = "-appId:";
-            args[2] = "-clientSecret:";
-            args[3] = "-solution:";
+            var expected = new InputDto()
+            {
+                DataverseUrl = "http:myinstance.crm4.dynamics.com",
+                ApplicationId = "1234",
+                ClientSecret = "09876543321",
+                SolutionName = "MySolution",
+                IsManaged = false,
+                OutputDir = "."
+            };
 
-            throw new NotImplementedException();
-        }
+            string[] args = new string[4];
+            args[0] = $"-url:http:{expected.DataverseUrl}";
+            args[1] = $"-appId:{expected.ApplicationId}";
+            args[2] = $"-clientSecret:{expected.ClientSecret}";
+            args[3] = $"-solution:{expected.SolutionName}";
 
-        [Fact]
-        public void GetInput_InvalidArgsCount_ThrowException()
-        {
-            throw new NotImplementedException();
+            var reader = new InputArgumentReader();
+            var actual = reader.GetInput(args);
+
+            Assert.Multiple(
+                () => Assert.Equal(expected.DataverseUrl, actual.DataverseUrl),
+                () => Assert.Equal(expected.ApplicationId, actual.ApplicationId),
+                () => Assert.Equal(expected.ClientSecret, actual.ClientSecret),
+                () => Assert.Equal(expected.SolutionName, actual.SolutionName),
+                () => Assert.Equal(expected.IsManaged, actual.IsManaged),
+                () => Assert.Equal(expected.OutputDir, actual.OutputDir)
+            );
         }
 
         [Fact]
         public void GetInput_MisingDataverseUrl_ThrowException()
         {
-            throw new NotImplementedException();
+            var expected = new InputDto()
+            {
+                DataverseUrl = "http:myinstance.crm4.dynamics.com",
+                ApplicationId = "1234",
+                ClientSecret = "09876543321",
+                SolutionName = "MySolution",
+                IsManaged = false,
+                OutputDir = "."
+            };
+
+            string[] args = new string[3];
+            args[0] = $"-appId:{expected.ApplicationId}";
+            args[1] = $"-clientSecret:{expected.ClientSecret}";
+            args[2] = $"-solution:{expected.SolutionName}";
+
+            var reader = new InputArgumentReader();
+
+            Assert.Throws<ArgumentException>(() => reader.GetInput(args)); 
         }
 
         [Fact]
         public void GetInput_MisingApplicationId_ThrowException()
         {
-            throw new NotImplementedException();
+            var expected = new InputDto()
+            {
+                DataverseUrl = "http:myinstance.crm4.dynamics.com",
+                ApplicationId = "1234",
+                ClientSecret = "09876543321",
+                SolutionName = "MySolution",
+                IsManaged = false,
+                OutputDir = "."
+            };
+
+            string[] args = new string[4];
+            args[0] = $"-url:http:{expected.DataverseUrl}";
+            args[1] = $"-appId:{expected.ApplicationId}";
+            args[2] = $"-clientSecret:{expected.ClientSecret}";
+            args[3] = $"-solution:{expected.SolutionName}";
+
+            var reader = new InputArgumentReader();
+            
+            Assert.Throws<ArgumentException>(() => reader.GetInput(args)); 
         }
 
         [Fact]
         public void GetInput_ClientSecret_ThrowException()
         {
-            throw new NotImplementedException();
+            var expected = new InputDto()
+            {
+                DataverseUrl = "http:myinstance.crm4.dynamics.com",
+                ApplicationId = "1234",
+                ClientSecret = "09876543321",
+                SolutionName = "MySolution",
+                IsManaged = false,
+                OutputDir = "."
+            };
+
+            string[] args = new string[4];
+            args[0] = $"-url:http:{expected.DataverseUrl}";
+            args[1] = $"-appId:{expected.ApplicationId}";
+            args[2] = $"-solution:{expected.SolutionName}";
+
+            var reader = new InputArgumentReader();
+
+            Assert.Throws<ArgumentException>(() => reader.GetInput(args));
         }
 
         [Fact]
         public void GetInput_MisingSolutionName_ThrowException()
         {
-            throw new NotImplementedException();
+            var expected = new InputDto()
+            {
+                DataverseUrl = "http:myinstance.crm4.dynamics.com",
+                ApplicationId = "1234",
+                ClientSecret = "09876543321",
+                SolutionName = "MySolution",
+                IsManaged = false,
+                OutputDir = "."
+            };
+
+            string[] args = new string[4];
+            args[0] = $"-url:http:{expected.DataverseUrl}";
+            args[1] = $"-appId:{expected.ApplicationId}";
+            args[2] = $"-clientSecret:{expected.ClientSecret}";
+
+            var reader = new InputArgumentReader();
+
+            Assert.Throws<ArgumentException>(() => reader.GetInput(args));
         }
 
-        [Fact]
-        public void GetInput_MisingIsManaged_UseDefaultValue()
+        public void GetInput_InvalidParameter_ThrowException()
         {
-            throw new NotImplementedException();
-        }
+            var expected = new InputDto()
+            {
+                DataverseUrl = "http:myinstance.crm4.dynamics.com",
+                ApplicationId = "1234",
+                ClientSecret = "09876543321",
+                SolutionName = "MySolution",
+                IsManaged = false,
+                OutputDir = "."
+            };
 
-        [Fact]
-        public void GetInput_MisingOutputDir_UseDefaultValue()
-        {
-            throw new NotImplementedException();
-        }
+            string[] args = new string[5];
+            args[0] = $"-url:http:{expected.DataverseUrl}";
+            args[1] = $"-appId:{expected.ApplicationId}";
+            args[2] = $"-clientSecret:{expected.ClientSecret}";
+            args[3] = $"-solution:{expected.SolutionName}";
+            args[4] = $"-invalidParam:InvalidValue";
 
+            var reader = new InputArgumentReader();
+
+            Assert.Throws<ArgumentException>(() => reader.GetInput(args));
+        }
     }
 }
