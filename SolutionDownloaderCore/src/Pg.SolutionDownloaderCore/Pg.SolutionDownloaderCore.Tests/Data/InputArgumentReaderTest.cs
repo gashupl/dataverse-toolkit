@@ -42,6 +42,7 @@ namespace Pg.SolutionDownloaderCore.Tests.Data
             );
         }
 
+        [Fact]
         public void GetInput_ValidArgsWithoutDefaults_ReturnDto()
         {
             var expected = new InputDto()
@@ -166,6 +167,7 @@ namespace Pg.SolutionDownloaderCore.Tests.Data
             Assert.Throws<ArgumentException>(() => reader.GetInput(args));
         }
 
+        [Fact]
         public void GetInput_InvalidParameter_ThrowException()
         {
             var expected = new InputDto()
