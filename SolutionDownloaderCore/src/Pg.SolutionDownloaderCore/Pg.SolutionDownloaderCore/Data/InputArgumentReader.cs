@@ -59,21 +59,26 @@ namespace Pg.SolutionDownloaderCore.Data
 
             if (string.IsNullOrEmpty(output.DataverseUrl))
             {
-                throw new ArgumentException($"Missing {urlPrefix} parameter"); 
+				ThrowMissingParameterException(urlPrefix);
             }
             else if (string.IsNullOrEmpty(output.ApplicationId))
             {
-                throw new ArgumentException($"Missing {appIdPrefix} parameter");
+				ThrowMissingParameterException(appIdPrefix);
             }
             else if (string.IsNullOrEmpty(output.ClientSecret))
             {
-                throw new ArgumentException($"Missing {clientSecretPrefix} parameter");
+				ThrowMissingParameterException(clientSecretPrefix);
             }
             else if (string.IsNullOrEmpty(output.SolutionName))
             {
-                throw new ArgumentException($"Missing {solutionPrexix} parameter");
+                ThrowMissingParameterException(solutionPrexix); 
             }
             return output;
         }
+
+        private void ThrowMissingParameterException(string parameterName)
+        {
+			throw new ArgumentException($"Missing parameter: { parameterName }");
+		}
     }
 }

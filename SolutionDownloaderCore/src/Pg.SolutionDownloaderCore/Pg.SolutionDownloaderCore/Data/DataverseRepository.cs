@@ -13,7 +13,7 @@ namespace Pg.SolutionDownloaderCore.Data
         }
         public ExportSolutionResponse Get(string name, bool isManaged)
         {
-            ExportSolutionRequest exportSolutionRequest = new ExportSolutionRequest();
+            var exportSolutionRequest = new ExportSolutionRequest();
             exportSolutionRequest.Managed = isManaged;
             exportSolutionRequest.SolutionName = name;
 
