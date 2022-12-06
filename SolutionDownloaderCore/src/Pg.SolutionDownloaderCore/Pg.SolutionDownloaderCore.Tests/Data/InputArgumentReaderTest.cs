@@ -75,7 +75,7 @@ namespace Pg.SolutionDownloaderCore.Tests.Data
                 ClientSecret = "09876543321",
                 SolutionName = "MySolution",
                 IsManaged = false,
-                OutputDir = "."
+                OutputDir = String.Empty
             };
 
             string[] args = new string[4];
