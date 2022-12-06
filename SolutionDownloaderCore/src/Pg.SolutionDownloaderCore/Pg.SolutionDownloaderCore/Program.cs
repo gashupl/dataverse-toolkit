@@ -16,8 +16,8 @@ public class Program
 
 		//TODO: Add invalid arguments error handling
 		var input = argsReader.GetInput(args);
-		var connectionString = @$"Url=https://{input.DataverseUrl};AuthType=ClientSecret;
-				ClientId={input.ApplicationId};ClientSecret={input.ClientSecret};RequireNewInstance=true";
+		var connectionString = @$"Url={input.DataverseUrl};AuthType=ClientSecret;"
+				+ $"ClientId={input.ApplicationId};ClientSecret={input.ClientSecret};RequireNewInstance=true";
 
 		var serviceProvider = new ServiceCollection()
 			.AddLogging(opt => opt.AddConsole().SetMinimumLevel(LogLevel.Trace))
