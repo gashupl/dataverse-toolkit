@@ -23,6 +23,7 @@ public class Program
 			.AddLogging(opt => opt.AddConsole().SetMinimumLevel(LogLevel.Trace))
 			.AddSingleton<IOrganizationService>(new ServiceClient(connectionString))
 			.AddSingleton<ISolutionRepository, DataverseRepository>()
+			.AddSingleton<IFile, FileWrapper>()
 			.AddSingleton<ISolutionService, SolutionService>()
 			.BuildServiceProvider();
 

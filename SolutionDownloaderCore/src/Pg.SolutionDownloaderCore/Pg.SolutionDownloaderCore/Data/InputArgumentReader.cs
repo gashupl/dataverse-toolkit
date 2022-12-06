@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace Pg.SolutionDownloaderCore.Data
 {
-    internal class InputArgumentReader : IInputArgumentReader
+    internal class InputArgumentReader
     {
         const string urlPrefix = "-url:";
         const string appIdPrefix = "-appid:";
