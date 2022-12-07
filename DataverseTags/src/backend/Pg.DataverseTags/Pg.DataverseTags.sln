@@ -3,11 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32414.318
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{62B41AB8-71A8-4F15-A863-A4C24895BC2F}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{EDEBEEBC-446B-4B7D-AA97-B2C5167068F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pg.DataverseTags.Plugins", "Pg.DataverseTags.Plugins\Pg.DataverseTags.Plugins.csproj", "{4ED8B5B6-5EF4-4F76-B4EA-F1928C3698FD}"
 EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4ED8B5B6-5EF4-4F76-B4EA-F1928C3698FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4ED8B5B6-5EF4-4F76-B4EA-F1928C3698FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4ED8B5B6-5EF4-4F76-B4EA-F1928C3698FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4ED8B5B6-5EF4-4F76-B4EA-F1928C3698FD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
