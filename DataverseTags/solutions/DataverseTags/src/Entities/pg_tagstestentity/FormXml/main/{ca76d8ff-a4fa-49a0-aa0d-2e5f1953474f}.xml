@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{ca76d8ff-a4fa-49a0-aa0d-2e5f1953474f}</formid>
+    <IntroducedVersion>1.0.0.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls" shownavigationbar="true" showImage="false" maxWidth="1920">
+      <tabs>
+        <tab verticallayout="true" id="{ccfdc3be-ec9c-410f-95b7-5358044b907f}" IsUserDefined="1" labelid="{9806c883-11da-418a-b98a-bb3d48724233}">
+          <labels>
+            <label description="General" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showlabel="false" showbar="false" IsUserDefined="0" id="{3f766681-f2e3-4dbc-b771-4528cddb4a3b}" labelid="{2c857166-d4d5-4150-8fff-5d7ecb888284}">
+                  <labels>
+                    <label description="General" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{d21efae4-f9bc-4c7b-9b99-cc422d962f93}" labelid="{69172f45-dca5-4dbc-9831-94747fb2f89f}">
+                        <labels>
+                          <label description="Name" languagecode="1033" />
+                        </labels>
+                        <control id="pg_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="pg_name" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{ece9a7d3-4bb5-5a3d-16ca-76249a88681e}" showlabel="true" locklevel="0">
+                        <labels>
+                          <label description="Tags" languagecode="1033" />
+                        </labels>
+                        <control id="pg_tags" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="pg_tags" disabled="false" uniqueid="{a5277ec0-b432-3a67-90cc-46b0b7a7206a}" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{5e0bb104-a39c-4568-861a-35318a0cc671}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{eed727f5-b71f-4176-af6e-45f85f222d13}" showlabel="false" labelid="{f5c11679-c484-4ac5-972b-3dc3eb9c6ffc}">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{aa5925ea-9353-47c4-a39e-65afd8727cb2}" showlabel="false" labelid="{d7153168-ccc0-4667-bd88-61d5f1764120}">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{36ef3f19-1ee3-45c6-8739-8d5fdff91aa4}" showlabel="false" labelid="{51fd83db-b8bc-4b0a-83ac-d39600e1f6bf}">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{a057aa96-d146-4e20-b8fd-c7abab78d504}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{b70e0976-f8e9-48ec-84c2-3709905d4af9}" showlabel="false" labelid="{c0857df1-246e-40a9-9778-4076f572f663}">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{20449465-45ed-447d-ad4b-12189b002797}" showlabel="false" labelid="{8186fb7a-9e55-4e17-b4ab-adcdfa7a1bfe}">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{acb39dc0-4057-410f-b9ad-bb791bb4a482}" showlabel="false" labelid="{cf64736b-c998-44f5-b096-b7f2b7166d5c}">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <Navigation>
+        <NavBar></NavBar>
+        <NavBarAreas>
+          <NavBarArea Id="Info">
+            <Titles>
+              <Title LCID="1033" Text="Common" />
+            </Titles>
+          </NavBarArea>
+          <NavBarArea Id="Sales">
+            <Titles>
+              <Title LCID="1033" Text="Sales" />
+            </Titles>
+          </NavBarArea>
+          <NavBarArea Id="Service">
+            <Titles>
+              <Title LCID="1033" Text="Service" />
+            </Titles>
+          </NavBarArea>
+          <NavBarArea Id="Marketing">
+            <Titles>
+              <Title LCID="1033" Text="Marketing" />
+            </Titles>
+          </NavBarArea>
+          <NavBarArea Id="ProcessCenter">
+            <Titles>
+              <Title LCID="1033" Text="Process Sessions" />
+            </Titles>
+          </NavBarArea>
+        </NavBarAreas>
+      </Navigation>
+      <controlDescriptions />
+      <DisplayConditions Order="1" FallbackForm="true">
+        <Role Id="{627090ff-40a3-4053-8790-584edc5be201}" />
+        <Role Id="{119f245c-3cc8-4b62-b31c-d1a046ced15d}" />
+      </DisplayConditions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Form without PCF" languagecode="1033" />
+    </LocalizedNames>
+  </systemform>
+</forms>

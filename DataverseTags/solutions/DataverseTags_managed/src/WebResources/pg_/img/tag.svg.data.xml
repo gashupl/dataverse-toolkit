@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WebResource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <WebResourceId>{f2e0fe0e-b443-ed11-bba2-000d3aabdfee}</WebResourceId>
+  <Name>pg_/img/tag.svg</Name>
+  <DisplayName>pg_/img/tag.svg</DisplayName>
+  <WebResourceType>11</WebResourceType>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <IsEnabledForMobileClient>1</IsEnabledForMobileClient>
+  <IsAvailableForMobileOffline>1</IsAvailableForMobileOffline>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <IsHidden>0</IsHidden>
+  <FileName>/WebResources/pg_imgtagsvgF2E0FE0E-B443-ED11-BBA2-000D3AABDFEE</FileName>
+</WebResource>

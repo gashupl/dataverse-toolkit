@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<EntityRelationships xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <EntityRelationship Name="lk_pg_tag_createdby" />
+  <EntityRelationship Name="lk_pg_tag_modifiedby" />
+  <EntityRelationship Name="lk_pg_tagstestentity_createdby" />
+  <EntityRelationship Name="lk_pg_tagstestentity_modifiedby" />
+  <EntityRelationship Name="organization_pg_tag" />
+  <EntityRelationship Name="organization_pg_tagstestentity" />
+</EntityRelationships>
