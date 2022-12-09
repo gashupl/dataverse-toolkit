@@ -19,9 +19,9 @@
   <PropertyGroup>
     <PackageId>Pg.DataverseTags.Plugins</PackageId>
     <Version>$(FileVersion)</Version>
-    <Authors>PiotrGaszewski</Authors>
-    <Company>MyCompany</Company>
-    <Description>This is a sample nuget package which contains a Dataverse plugin and its runtime dependencies like Newtonsoft.Json</Description>
+    <Authors>Piotr Gaszewski</Authors>
+    <Company>Piotr Gaszewski</Company>
+    <Description>Plugins Library for Dataverse Tags Solution</Description>
   </PropertyGroup>
 
   <ItemGroup>

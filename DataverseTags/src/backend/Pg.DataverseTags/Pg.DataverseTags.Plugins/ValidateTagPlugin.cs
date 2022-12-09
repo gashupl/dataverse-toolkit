@@ -7,10 +7,10 @@ namespace Pg.DataverseTags.Plugins
     /// Plugin development guide: https://docs.microsoft.com/powerapps/developer/common-data-service/plug-ins
     /// Best practices and guidance: https://docs.microsoft.com/powerapps/developer/common-data-service/best-practices/business-logic/
     /// </summary>
-    public class Plugin1 : PluginBase
+    public class ValidateTagPlugin : PluginBase
     {
-        public Plugin1(string unsecureConfiguration, string secureConfiguration)
-            : base(typeof(Plugin1))
+        public ValidateTagPlugin(string unsecureConfiguration, string secureConfiguration)
+            : base(typeof(ValidateTagPlugin))
         {
             // TODO: Implement your custom configuration handling
             // https://docs.microsoft.com/powerapps/developer/common-data-service/register-plug-in#set-configuration-data
