@@ -19,12 +19,25 @@ namespace Pg.SolutionDownloaderCore.Services
         public void DownloadSolution(string outputDir, string name, bool isManaged)
         {
             _logger.LogTrace("Getting solution ready...");
-            var response = _repository.Get(name, isManaged); 
-            if(response != null) 
+            try
             {
-                byte[] exportXml = response.ExportSolutionFile;
-                string filename = name + ".zip";
-                _file.WriteAllBytes(outputDir + filename, exportXml);
+				var response = _repository.Get(name, isManaged);
+				if (response != null)
+				{
+					_logger.LogTrace("Solution exported");
+					byte[] exportXml = response.ExportSolutionFile;
+					string filename = name + ".zip";
+					_file.WriteAllBytes(outputDir + filename, exportXml);
+					_logger.LogTrace("Solution saved to disk");
+				}
+			}
+            catch (DataverseCallException ex) 
+            {
+				//TODO: Add error handling
+			}
+			catch (Exception ex)
+            {
+                //TODO: Add error handling
             }
         }
     }
