@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using Pg.SolutionDownloaderCore.Data;
 
-
 namespace Pg.SolutionDownloaderCore.Services
 {
     public class SolutionService : ISolutionService
@@ -18,26 +17,33 @@ namespace Pg.SolutionDownloaderCore.Services
 
         public void DownloadSolution(string outputDir, string name, bool isManaged)
         {
-            _logger.LogTrace("Getting solution ready...");
+            _logger.LogInformation("Getting solution ready...");
             try
             {
 				var response = _repository.Get(name, isManaged);
 				if (response != null)
 				{
-					_logger.LogTrace("Solution exported");
+                    _logger.LogInformation("Solution exported");
 					byte[] exportXml = response.ExportSolutionFile;
 					string filename = name + ".zip";
 					_file.WriteAllBytes(outputDir + filename, exportXml);
-					_logger.LogTrace("Solution saved to disk");
+                    _logger.LogInformation("Solution saved to disk");
 				}
 			}
             catch (DataverseCallException ex) 
             {
-				//TODO: Add error handling
-			}
+                _logger.LogInformation("Error when connecting to Dataverse");
+                _logger.LogInformation(ex.Message);
+            }
 			catch (Exception ex)
             {
-                //TODO: Add error handling
+                _logger.LogInformation("The application terminated with an error.");
+                _logger.LogInformation(ex.Message);
+
+                if (ex.InnerException != null)
+                {
+                    _logger.LogInformation(ex.InnerException.Message);    
+                }
             }
         }
     }

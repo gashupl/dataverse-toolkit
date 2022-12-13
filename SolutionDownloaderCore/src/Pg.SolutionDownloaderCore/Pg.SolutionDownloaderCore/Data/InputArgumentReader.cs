@@ -5,12 +5,12 @@ namespace Pg.SolutionDownloaderCore.Data
 {
     internal class InputArgumentReader
     {
-        const string urlPrefix = "-url:";
-        const string appIdPrefix = "-appid:";
-        const string clientSecretPrefix = "-clientsecret:";
-        const string solutionPrexix = "-solution:";
-        const string isManagedPrefix = "-ismanaged:";
-        const string outputDirPrefix = "-outputdir:";
+        public const string UrlPrefix = "-url:";
+        public const string AppIdPrefix = "-appid:";
+        public const string ClientSecretPrefix = "-clientsecret:";
+        public const string SolutionPrexix = "-solution:";
+        public const string IsManagedPrefix = "-ismanaged:";
+        public const string OutputDirPrefix = "-outputdir:";
 
         public InputDto GetInput(string[] args)
         {
@@ -18,26 +18,26 @@ namespace Pg.SolutionDownloaderCore.Data
             foreach (var arg in args.Where(a => a != null))
             {
                 var formattedArg = arg.ToLower(); 
-                if (formattedArg.StartsWith(urlPrefix))
+                if (formattedArg.StartsWith(UrlPrefix))
                 {
-                    output.DataverseUrl = arg.Remove(0, urlPrefix.Length); 
+                    output.DataverseUrl = arg.Remove(0, UrlPrefix.Length); 
                 }
-                else if (formattedArg.StartsWith(appIdPrefix))
+                else if (formattedArg.StartsWith(AppIdPrefix))
                 {
-                    output.ApplicationId = arg.Remove(0, appIdPrefix.Length);
+                    output.ApplicationId = arg.Remove(0, AppIdPrefix.Length);
                 }
-                else if (formattedArg.StartsWith(clientSecretPrefix))
+                else if (formattedArg.StartsWith(ClientSecretPrefix))
                 {
-                    output.ClientSecret = arg.Remove(0, clientSecretPrefix.Length);
+                    output.ClientSecret = arg.Remove(0, ClientSecretPrefix.Length);
                 }
-                else if (formattedArg.StartsWith(solutionPrexix))
+                else if (formattedArg.StartsWith(SolutionPrexix))
                 {
-                    output.SolutionName = arg.Remove(0, solutionPrexix.Length);
+                    output.SolutionName = arg.Remove(0, SolutionPrexix.Length);
                 }
-                else if (formattedArg.StartsWith(isManagedPrefix))
+                else if (formattedArg.StartsWith(IsManagedPrefix))
                 {
                     var isManaged = false; 
-                    var result = bool.TryParse(formattedArg.Remove(0, isManagedPrefix.Length), out isManaged);
+                    var result = bool.TryParse(formattedArg.Remove(0, IsManagedPrefix.Length), out isManaged);
                     if (result)
                     {
                         output.IsManaged = isManaged;
@@ -47,9 +47,9 @@ namespace Pg.SolutionDownloaderCore.Data
                         throw new ArgumentException($"Invalid isManaged parameter value : { formattedArg }");
                     }
                 }
-                else if (formattedArg.StartsWith(outputDirPrefix))
+                else if (formattedArg.StartsWith(OutputDirPrefix))
                 {
-                    output.OutputDir = arg.Remove(0, outputDirPrefix.Length);
+                    output.OutputDir = arg.Remove(0, OutputDirPrefix.Length);
                 }
                 else
                 {
@@ -59,19 +59,19 @@ namespace Pg.SolutionDownloaderCore.Data
 
             if (string.IsNullOrEmpty(output.DataverseUrl))
             {
-				ThrowMissingParameterException(urlPrefix);
+				ThrowMissingParameterException(UrlPrefix);
             }
             else if (string.IsNullOrEmpty(output.ApplicationId))
             {
-				ThrowMissingParameterException(appIdPrefix);
+				ThrowMissingParameterException(AppIdPrefix);
             }
             else if (string.IsNullOrEmpty(output.ClientSecret))
             {
-				ThrowMissingParameterException(clientSecretPrefix);
+				ThrowMissingParameterException(ClientSecretPrefix);
             }
             else if (string.IsNullOrEmpty(output.SolutionName))
             {
-                ThrowMissingParameterException(solutionPrexix); 
+                ThrowMissingParameterException(SolutionPrexix); 
             }
             return output;
         }
