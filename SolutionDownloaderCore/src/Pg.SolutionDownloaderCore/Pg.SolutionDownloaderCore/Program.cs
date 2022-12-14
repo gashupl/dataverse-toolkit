@@ -3,7 +3,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Xrm.Sdk;
 using Pg.SolutionDownloaderCore.Data;
 using Pg.SolutionDownloaderCore.Services;
-using Microsoft.PowerPlatform.Dataverse.Client; 
+using Microsoft.PowerPlatform.Dataverse.Client;
+using Pg.SolutionDownloaderCore.Model;
 
 namespace Pg.SolutionDownloaderCore;
 
@@ -13,9 +14,25 @@ public class Program
 	{
 		var argsReader = new InputArgumentReader();
 		ILogger logger;
-
-		//TODO: Add invalid arguments error handling
-		var input = argsReader.GetInput(args);
+		InputDto input; 
+		try
+		{
+            input = argsReader.GetInput(args);
+        }
+		catch(Exception ex)
+		{
+            Console.WriteLine(ex.Message);
+			Console.WriteLine($"Required parameters:");
+            Console.WriteLine($"{InputArgumentReader.UrlPrefix}value");
+            Console.WriteLine($"{InputArgumentReader.AppIdPrefix}value");
+            Console.WriteLine($"{InputArgumentReader.ClientSecretPrefix}value");
+            Console.WriteLine($"{InputArgumentReader.SolutionPrexix}value");
+            Console.WriteLine($"Optional parameters:");
+            Console.WriteLine($"{InputArgumentReader.IsManagedPrefix}value");
+            Console.WriteLine($"{InputArgumentReader.OutputDirPrefix}value");
+            return; 
+        }
+	
 		var connectionString = @$"Url={input.DataverseUrl};AuthType=ClientSecret;"
 				+ $"ClientId={input.ApplicationId};ClientSecret={input.ClientSecret};RequireNewInstance=true";
 
@@ -31,21 +48,12 @@ public class Program
 		if (loggerFactory != null)
 		{
 			logger = loggerFactory.CreateLogger<Program>();
-			try
-			{
-				logger.LogTrace("Starting application");
+            logger.LogInformation("Starting application");
 
-				//TODO: Add dataverse service and local storage related error handling
-				var solutionDownloader = serviceProvider.GetService<ISolutionService>();
-				solutionDownloader?.DownloadSolution(input.OutputDir, input.SolutionName, input.IsManaged);
+            var solutionDownloader = serviceProvider.GetService<ISolutionService>();
+            solutionDownloader?.DownloadSolution(input.OutputDir, input.SolutionName, input.IsManaged);
 
-				logger.LogTrace("Closing application");
-			}
-			catch (Exception ex)
-			{
-				logger.LogError(ex, "Unhandled exception occured.");
-			}
-		}
-
+            logger.LogInformation("Closing application");
+        }
 	}
 }
