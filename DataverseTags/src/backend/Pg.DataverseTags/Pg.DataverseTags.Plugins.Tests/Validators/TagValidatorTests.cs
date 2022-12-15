@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Pg.DataverseTags.Plugins.Validators;
+using Pg.DataverseTags.Shared.Model;
+using System;
 using Xunit;
 
 namespace Pg.DataverseTags.Plugins.Tests.Validators
@@ -8,19 +10,31 @@ namespace Pg.DataverseTags.Plugins.Tests.Validators
 		[Fact]
 		public void IsValid_InvalidEntityType_ReturnsFalse()
 		{
-			throw new NotImplementedException();
+			throw new NotImplementedException(); 
 		}
 
 		[Fact]
 		public void IsValid_InvalidInput_ReturnsFalse()
 		{
-			throw new NotImplementedException();
-		}
+			var input = new pg_tag()
+			{
+				pg_name = "my-tag-name;"
+			}; 
+            var validator = new TagValidator();
+            var result = validator.IsValid(input)?.IsValid;
+            Assert.False(result);
+        }
 
 		[Fact]
-		public void IsValid_ValidInput_ReturnsFalse()
+		public void IsValid_ValidInput_ReturnsTrue()
 		{
-			throw new NotImplementedException();
+            var input = new pg_tag()
+            {
+                pg_name = "my-tag-name"
+            };
+            var validator = new TagValidator();
+			var result = validator.IsValid(input)?.IsValid;
+			Assert.True(result); 
 		}
 	}
 }

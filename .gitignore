@@ -18,3 +18,5 @@
 /DataverseTags/src/backend/Pg.DataverseTags/Pg.DataverseTags.Plugins.Tests/bin/Debug
 /DataverseTags/src/backend/Pg.DataverseTags/Pg.DataverseTags.Plugins.Tests/obj/Debug/.NETFramework,Version=v4.6.2.AssemblyAttributes.cs
 /DataverseTags/src/backend/Pg.DataverseTags/Pg.DataverseTags.Plugins.Tests/obj/Debug
+/DataverseTags/src/backend/Pg.DataverseTags/Pg.DataverseTags.Shared/bin/Debug
+/DataverseTags/src/backend/Pg.DataverseTags/Pg.DataverseTags.Shared/obj/Debug
