@@ -1,22 +1,16 @@
 using Microsoft.Xrm.Sdk;
+using Pg.DataverseTags.Plugins.Validators;
 using System;
 
 namespace Pg.DataverseTags.Plugins
 {
-    /// <summary>
-    /// Plugin development guide: https://docs.microsoft.com/powerapps/developer/common-data-service/plug-ins
-    /// Best practices and guidance: https://docs.microsoft.com/powerapps/developer/common-data-service/best-practices/business-logic/
-    /// </summary>
     public class ValidateTagPlugin : PluginBase
     {
         public ValidateTagPlugin(string unsecureConfiguration, string secureConfiguration)
             : base(typeof(ValidateTagPlugin))
         {
-            // TODO: Implement your custom configuration handling
-            // https://docs.microsoft.com/powerapps/developer/common-data-service/register-plug-in#set-configuration-data
         }
 
-        // Entry point for custom business logic execution
         protected override void ExecuteDataversePlugin(ILocalPluginContext localPluginContext)
         {
             if (localPluginContext == null)
@@ -25,20 +19,18 @@ namespace Pg.DataverseTags.Plugins
             }
 
             var context = localPluginContext.PluginExecutionContext;
+            if (context.InputParameters.Contains("Target") && context.InputParameters["Target"] is Entity)
+            {
+                var entity = (Entity)context.InputParameters["Target"];
+                var validator = new TagValidator();
+                var response = validator.IsValid(entity);
 
-            // TODO: Implement your custom business logic
-
-            // Check for the entity on which the plugin would be registered
-            //if (context.InputParameters.Contains("Target") && context.InputParameters["Target"] is Entity)
-            //{
-            //    var entity = (Entity)context.InputParameters["Target"];
-
-            //    // Check for entity name on which this plugin would be registered
-            //    if (entity.LogicalName == "account")
-            //    {
-
-            //    }
-            //}
+                if (!response.IsValid)
+                {
+                    throw new InvalidPluginExecutionException(response.GetErrors()); 
+                }
+ 
+            }
         }
     }
 }
