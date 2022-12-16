@@ -19,7 +19,10 @@ namespace Pg.DataverseTags.Plugins.Validators
                     Errors = new List<string>() { InvalidEntityErrorMessage }
                 };
             }
-			if (input.Contains(";"))
+
+            var tagEntity = input.ToEntity<pg_tag>(); 
+
+			if (tagEntity.pg_name.Contains(";"))
 			{
                 return new IsValidResponse()
                 {

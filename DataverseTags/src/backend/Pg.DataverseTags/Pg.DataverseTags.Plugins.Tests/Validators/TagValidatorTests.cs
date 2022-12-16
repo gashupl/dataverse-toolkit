@@ -1,4 +1,5 @@
-﻿using Pg.DataverseTags.Plugins.Validators;
+﻿using Microsoft.Xrm.Sdk;
+using Pg.DataverseTags.Plugins.Validators;
 using Pg.DataverseTags.Shared.Model;
 using System;
 using Xunit;
@@ -10,8 +11,15 @@ namespace Pg.DataverseTags.Plugins.Tests.Validators
 		[Fact]
 		public void IsValid_InvalidEntityType_ReturnsFalse()
 		{
-			throw new NotImplementedException(); 
-		}
+			var input = new Entity()
+			{
+				LogicalName = "account"
+			}; 
+
+            var validator = new TagValidator();
+            var result = validator.IsValid(input)?.IsValid;
+            Assert.False(result);
+        }
 
 		[Fact]
 		public void IsValid_InvalidInput_ReturnsFalse()
