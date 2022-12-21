@@ -1,7 +1,6 @@
 using Microsoft.Xrm.Sdk;
 using Pg.DataverseTags.Plugins.Validators;
 using System;
-using System.Diagnostics;
 
 namespace Pg.DataverseTags.Plugins
 {

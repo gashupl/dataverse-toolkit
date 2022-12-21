@@ -28,7 +28,7 @@
                       </cell>
                     </row>
                     <row>
-                      <cell id="{b84df927-fe69-40c0-a33f-37b233750429}" locklevel="0" colspan="1" rowspan="1" showlabel="true" visible="false">
+                      <cell id="{b84df927-fe69-40c0-a33f-37b233750429}" locklevel="0" colspan="1" rowspan="1" showlabel="true">
                         <labels>
                           <label description="Tags" languagecode="1033" />
                         </labels>
@@ -123,19 +123,19 @@
           </customControl>
           <customControl formFactor="0" name="pg_Pg.DataverseTags">
             <parameters>
-              <sampleProperty>pg_tags</sampleProperty>
+              <tags>pg_tags</tags>
               <msinternal.isvisibleinmocaonly static="true">true</msinternal.isvisibleinmocaonly>
             </parameters>
           </customControl>
           <customControl formFactor="1" name="pg_Pg.DataverseTags">
             <parameters>
-              <sampleProperty>pg_tags</sampleProperty>
+              <tags>pg_tags</tags>
               <msinternal.isvisibleinmocaonly static="true">true</msinternal.isvisibleinmocaonly>
             </parameters>
           </customControl>
           <customControl formFactor="2" name="pg_Pg.DataverseTags">
             <parameters>
-              <sampleProperty>pg_tags</sampleProperty>
+              <tags>pg_tags</tags>
               <msinternal.isvisibleinmocaonly static="true">true</msinternal.isvisibleinmocaonly>
             </parameters>
           </customControl>
