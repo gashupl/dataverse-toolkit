@@ -47,10 +47,11 @@ public class Program
 		var loggerFactory = serviceProvider.GetService<ILoggerFactory>();
 		if (loggerFactory != null)
 		{
-			try
+            logger = loggerFactory.CreateLogger<Program>();
+            try
 			{
-			logger = loggerFactory.CreateLogger<Program>();
-            logger.LogInformation("Starting application");
+				
+				logger.LogInformation("Starting application");
 
 				var solutionDownloader = serviceProvider.GetService<ISolutionService>();
 				solutionDownloader?.DownloadSolution(input.OutputDir, input.SolutionName, input.IsManaged);
@@ -61,7 +62,6 @@ public class Program
 			{
 				logger.LogError(ex, "Unhandled exception occured.");
             }
-		}
 
             logger.LogInformation("Closing application");
         }
