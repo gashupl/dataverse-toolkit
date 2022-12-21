@@ -12,19 +12,28 @@ public class Program
 {
 	public static void Main(string[] args)
 	{
-        InputDto input; 
+		var argsReader = new InputArgumentReader();
+		ILogger logger;
+		InputDto input; 
 		try
 		{
-			var argsReader = new InputArgumentReader();
             input = argsReader.GetInput(args);
         }
-        catch (Exception ex)
-        {
+		catch(Exception ex)
+		{
             Console.WriteLine(ex.Message);
-			return; 
+			Console.WriteLine($"Required parameters:");
+            Console.WriteLine($"{InputArgumentReader.UrlPrefix}value");
+            Console.WriteLine($"{InputArgumentReader.AppIdPrefix}value");
+            Console.WriteLine($"{InputArgumentReader.ClientSecretPrefix}value");
+            Console.WriteLine($"{InputArgumentReader.SolutionPrexix}value");
+            Console.WriteLine($"Optional parameters:");
+            Console.WriteLine($"{InputArgumentReader.IsManagedPrefix}value");
+            Console.WriteLine($"{InputArgumentReader.OutputDirPrefix}value");
+            return; 
         }
-
-        var connectionString = @$"Url={input.DataverseUrl};AuthType=ClientSecret;"
+	
+		var connectionString = @$"Url={input.DataverseUrl};AuthType=ClientSecret;"
 				+ $"ClientId={input.ApplicationId};ClientSecret={input.ClientSecret};RequireNewInstance=true";
 
 		var serviceProvider = new ServiceCollection()
@@ -38,11 +47,10 @@ public class Program
 		var loggerFactory = serviceProvider.GetService<ILoggerFactory>();
 		if (loggerFactory != null)
 		{
-
-            ILogger logger = loggerFactory.CreateLogger<Program>();
 			try
 			{
-                logger.LogTrace("Starting application");
+			logger = loggerFactory.CreateLogger<Program>();
+            logger.LogInformation("Starting application");
 
 				var solutionDownloader = serviceProvider.GetService<ISolutionService>();
 				solutionDownloader?.DownloadSolution(input.OutputDir, input.SolutionName, input.IsManaged);
@@ -55,5 +63,7 @@ public class Program
             }
 		}
 
+            logger.LogInformation("Closing application");
+        }
 	}
 }
