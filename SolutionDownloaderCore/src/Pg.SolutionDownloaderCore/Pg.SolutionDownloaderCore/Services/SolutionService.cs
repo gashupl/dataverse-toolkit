@@ -18,13 +18,15 @@ namespace Pg.SolutionDownloaderCore.Services
 
         public void DownloadSolution(string outputDir, string name, bool isManaged)
         {
-            _logger.LogTrace("Getting solution ready...");
+            _logger.LogInformation("Getting solution ready...");
             var response = _repository.Get(name, isManaged); 
             if(response != null) 
             {
+                _logger.LogInformation("Solution exported. Saving to file...");
                 byte[] exportXml = response.ExportSolutionFile;
                 string filename = name + ".zip";
                 _file.WriteAllBytes(outputDir + filename, exportXml);
+                _logger.LogInformation("Solution file successfully saved");
             }
         }
     }
