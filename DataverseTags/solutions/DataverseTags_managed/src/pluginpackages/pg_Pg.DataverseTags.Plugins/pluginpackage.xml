@@ -1,0 +1,8 @@
+<pluginpackage uniquename="pg_Pg.DataverseTags.Plugins">
+  <iscustomizable>1</iscustomizable>
+  <name>pg_Pg.DataverseTags.Plugins</name>
+  <package mimetype="application/octet-stream">pg_Pg.DataverseTags.Plugins.nupkg</package>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+  <version>1.0.0</version>
+</pluginpackage>

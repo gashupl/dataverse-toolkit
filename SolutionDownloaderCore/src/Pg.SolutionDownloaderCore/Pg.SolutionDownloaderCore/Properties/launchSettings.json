@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Pg.SolutionDownloaderCore": {
+      "commandName": "Project",
+      "commandLineArgs": "-url:https://piotrg.crm4.dynamics.com -appId:ad7fa0bd-5163-4a39-bb00-9f5a1e1a77d0 -clientSecret:qm97Q~7o2lPvHROOAICGT7MLKtgyEB0Rk0bxk -solution:Temp"
+    }
+  }
+}

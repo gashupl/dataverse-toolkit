@@ -30,6 +30,9 @@ Write-Output "Extracting customization file and removing downloaded zip archive.
 
 Write-output "extraction process completed."
 
+Write-Output "Deleting extracted NUGET package file ..."
+Remove-Item $exportLocation\$managedSolutionName\src\pluginpackages\pg_Pg.DataverseTags.Plugins\package\*.*
+
 Write-Output "Deleting solution's file..."
 Remove-Item $exportLocation\$solution1FileName
 Write-Output "Operation completed."
@@ -50,8 +53,12 @@ Write-Output "Extracting customization file and removing downloaded zip archive.
 
 Write-output "extraction process completed."
 
+Write-Output "Deleting extracted NUGET package file ..."
+Remove-Item $exportLocation\$unmanagedSolutionName\src\pluginpackages\pg_Pg.DataverseTags.Plugins\package\*.*
+
 Write-Output "Deleting solution's file..."
 Remove-Item $exportLocation\$solution1FileName
+
 Write-Output "Operation completed."
 
 
