@@ -1,4 +1,6 @@
 ﻿using Pg.SolutionDownloaderCore.Model;
+using System;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace Pg.SolutionDownloaderCore.Data
@@ -8,9 +10,8 @@ namespace Pg.SolutionDownloaderCore.Data
         public const string UrlPrefix = "-url:";
         public const string AppIdPrefix = "-appid:";
         public const string ClientSecretPrefix = "-clientsecret:";
-        public const string SolutionPrexix = "-solution:";
-        public const string IsManagedPrefix = "-ismanaged:";
-        public const string OutputDirPrefix = "-outputdir:";
+        public const string ConfigurationPrefix = "-config:";
+
 
         public InputDto GetInput(string[] args)
         {
@@ -30,26 +31,9 @@ namespace Pg.SolutionDownloaderCore.Data
                 {
                     input.ClientSecret = arg.Remove(0, ClientSecretPrefix.Length);
                 }
-                else if (formattedArg.StartsWith(SolutionPrexix))
+                else if (formattedArg.StartsWith(ConfigurationPrefix))
                 {
-                    input.SolutionName = arg.Remove(0, SolutionPrexix.Length);
-                }
-                else if (formattedArg.StartsWith(IsManagedPrefix))
-                {
-                    var isManaged = false; 
-                    var result = bool.TryParse(formattedArg.Remove(0, IsManagedPrefix.Length), out isManaged);
-                    if (result)
-                    {
-                        input.IsManaged = isManaged;
-                    }
-                    else
-                    {
-                        throw new ArgumentException($"Invalid isManaged parameter value : { formattedArg }");
-                    }
-                }
-                else if (formattedArg.StartsWith(OutputDirPrefix))
-                {
-                    input.OutputDir = arg.Remove(0, OutputDirPrefix.Length);
+                    input.Configuration = arg.Remove(0, ConfigurationPrefix.Length);
                 }
                 else
                 {
@@ -68,10 +52,6 @@ namespace Pg.SolutionDownloaderCore.Data
             else if (string.IsNullOrEmpty(input.ClientSecret))
             {
 				ThrowMissingParameterException(ClientSecretPrefix);
-            }
-            else if (string.IsNullOrEmpty(input.SolutionName))
-            {
-                ThrowMissingParameterException(SolutionPrexix); 
             }
             return input;
         }
