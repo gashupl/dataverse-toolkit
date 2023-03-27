@@ -91,9 +91,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Actions.cs" />
     <Compile Include="Model\DataverseContext.cs" />
     <Compile Include="Model\OptionSets.cs" />
     <Compile Include="Model\pg_tag.cs" />
+    <Compile Include="Model\PluginAssembly.cs" />
+    <Compile Include="Model\PluginType.cs" />
+    <Compile Include="Model\SdkMessage.cs" />
+    <Compile Include="Model\SdkMessageFilter.cs" />
+    <Compile Include="Model\SdkMessageProcessingStep.cs" />
+    <Compile Include="Model\SdkMessageProcessingStepImage.cs" />
+    <Compile Include="Model\SdkMessageProcessingStepSecureConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
