@@ -1,9 +1,7 @@
 ﻿using Pg.SolutionDownloaderCore.Model;
 using System;
 using System.Linq;
-using System.Text.RegularExpressions;
-
-namespace Pg.SolutionDownloaderCore.Data
+namespace Pg.DataverseTags.Plugins.StepsRegistrator.Data
 {
     internal class InputArgumentReader
     {

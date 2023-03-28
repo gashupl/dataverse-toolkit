@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-using Pg.SolutionDownloaderCore.Data;
+using Pg.DataverseTags.Plugins.StepsRegistrator.Data;
 using Pg.SolutionDownloaderCore.Model;
 using System;
 
