@@ -93,10 +93,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\ConfigWrapper.cs" />
     <Compile Include="Data\DataverseCallException.cs" />
     <Compile Include="Data\DataverseRepository.cs" />
-    <Compile Include="Data\IConfig.cs" />
     <Compile Include="Data\InputArgumentReader.cs" />
     <Compile Include="Data\IPluginsRepository.cs" />
     <Compile Include="Model\InputDto.cs" />
@@ -110,6 +108,12 @@
     <None Include="plugins-config.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Pg.DataverseTags.Shared\Pg.DataverseTags.Shared.csproj">
+      <Project>{f408aee0-fed9-456a-b609-179c09c5dc18}</Project>
+      <Name>Pg.DataverseTags.Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Text.Json.6.0.2\build\System.Text.Json.targets" Condition="Exists('..\packages\System.Text.Json.6.0.2\build\System.Text.Json.targets')" />

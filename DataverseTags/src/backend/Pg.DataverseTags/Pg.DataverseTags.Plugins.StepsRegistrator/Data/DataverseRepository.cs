@@ -3,7 +3,10 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Xrm.Sdk;
 using Pg.DataverseTags.Plugins.StepsRegistrator.Data;
 using Pg.DataverseTags.Plugins.StepsRegistrator.Model;
+using Pg.DataverseTags.Shared.Model;
 using System;
+using System.Diagnostics;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.ServiceModel;
 
 namespace Pg.SolutionDownloaderCore.Data
@@ -18,13 +21,26 @@ namespace Pg.SolutionDownloaderCore.Data
 			_logger = loggerFactory.CreateLogger<DataverseRepository>();
 		}
 
-        public void CreateStep(PluginStepConfig stepConfig)
+        public void CreateSteps()
         {
             try
             {
 				//TODO: Implement step creation here...
-				throw new NotImplementedException(); 
-			}
+
+                //Create
+				var step = new SdkMessageProcessingStep();
+                step.name = "Pg.DataverseTags.Plugins.ValidateTagPlugin: Create of pg_tag";
+                step.description = "Pg.DataverseTags.Plugins.ValidateTagPlugin: Create of pg_tag";
+                step.mode = SdkMessageProcessingStep_mode.Synchronous;
+				step.rank = 1; //Execution Order
+				step.stage = SdkMessageProcessingStep_stage.Prevalidation;
+				step.supporteddeployment = SdkMessageProcessingStep_supporteddeployment.ServerOnly; 
+    //            step.plugintypeid = sdkPluginType.ToEntityReference();
+				//step.
+    //            step.sdkmessageid = new EntityReference(SdkMessage.EntityLogicalName, sdkMessageId.Value);
+              
+                _service.Create(step);
+            }
 			catch (FaultException<OrganizationServiceFault> ex)
 			{
 				_logger.LogError("The application terminated with an error.");

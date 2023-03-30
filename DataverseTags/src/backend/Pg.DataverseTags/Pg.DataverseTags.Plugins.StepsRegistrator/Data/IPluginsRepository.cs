@@ -4,6 +4,6 @@ namespace Pg.DataverseTags.Plugins.StepsRegistrator.Data
 {
     public interface IPluginsRepository
     {
-        void CreateStep(PluginStepConfig stepConfig); 
+        void CreateSteps(); 
     }
 }
