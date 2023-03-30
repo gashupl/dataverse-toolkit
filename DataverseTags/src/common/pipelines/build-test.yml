@@ -54,7 +54,7 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-        $solutionFullPath = "solutions/DataverseTags_managed/src/Other/Solution.xml"
+        $solutionFullPath = "DataverseTags/solutions/DataverseTags_managed/src/Other/Solution.xml"
         $solutionXml = New-Object System.Xml.XmlDocument
         $solutionXml.PreserveWhitespace = $true
         $solutionXml.Load($solutionFullPath)
@@ -66,7 +66,7 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-        $solutionFullPath = "src/frontend/Pg.DataverseTags/DataverseTags/ControlManifest.Input.xml"
+        $solutionFullPath = "DataverseTags/src/frontend/Pg.DataverseTags/DataverseTags/ControlManifest.Input.xml"
         $solutionXml = New-Object System.Xml.XmlDocument
         $solutionXml.PreserveWhitespace = $true
         $solutionXml.Load($solutionFullPath)
@@ -79,7 +79,7 @@ steps:
 - task: MSCRMPackSolution@12
   displayName: Pack managed solution
   inputs:
-    unpackedFilesFolder: 'solutions/DataverseTags_managed/src'
+    unpackedFilesFolder: 'DataverseTags/solutions/DataverseTags_managed/src'
     packageType: 'Managed'
     includeVersionInSolutionFile: false
     outputPath: '$(Build.ArtifactStagingDirectory)/solutions'
@@ -87,7 +87,7 @@ steps:
 - task: MSCRMPackSolution@12
   displayName: Pack unmanaged solution
   inputs:
-    unpackedFilesFolder: 'solutions/DataverseTags/src'
+    unpackedFilesFolder: 'DataverseTags/solutions/DataverseTags/src'
     includeVersionInSolutionFile: false
     outputPath: '$(Build.ArtifactStagingDirectory)/solutions'
 
@@ -95,14 +95,14 @@ steps:
 - task: Npm@1
   displayName: Install missing NPM packages for Demo PCF Control
   inputs:
-    workingDir: 'src/frontend/Pg.DataverseTags/DataverseTags/'
+    workingDir: 'DataverseTags/src/frontend/Pg.DataverseTags/DataverseTags/'
     customCommand: 'install --prefer-offline --no-audit --unsafe-perm=true'
 
 - task: Npm@1
   displayName: Build DataverseTags Control
   inputs:
     command: 'custom'
-    workingDir: 'src/frontend/Pg.DataverseTags/DataverseTags/'
+    workingDir: 'DataverseTags/src/frontend/Pg.DataverseTags/DataverseTags/'
     customCommand: 'run build'
 # DataverseTags control related steps - end
 
@@ -111,12 +111,12 @@ steps:
   inputs:
     targetType: 'inline'
     script: '& "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\MSBuild\Current\Bin\MSBuild.exe" /t:build /restore /p:configuration=Release'
-    workingDirectory: 'solutions/DataverseTagsControls'
+    workingDirectory: 'DataverseTags/solutions/DataverseTagsControls'
 
 - task: CopyFiles@2
   displayName: Copy DataverseTags control solutions to artifact folder
   inputs:
-    SourceFolder: '$(Build.SourcesDirectory)/solutions/DataverseTagsControls/bin/Release/'
+    SourceFolder: '$(Build.SourcesDirectory)/DataverseTags/solutions/DataverseTagsControls/bin/Release/'
     Contents: '**'
     TargetFolder: '$(Build.ArtifactStagingDirectory)/solutions'
 
