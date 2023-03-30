@@ -42,7 +42,7 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-        $solutionFullPath = "solutions/DataverseTags/src/Other/Solution.xml"
+        $solutionFullPath = "DataverseTags/solutions/DataverseTags/src/Other/Solution.xml"
         $solutionXml = New-Object System.Xml.XmlDocument
         $solutionXml.PreserveWhitespace = $true
         $solutionXml.Load($solutionFullPath)
