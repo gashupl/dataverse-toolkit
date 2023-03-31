@@ -36,6 +36,19 @@ steps:
     nugetFeed: 'official'
     psFeed: 'official'
 
+- task: VSBuild@1
+  displayName: Build VS solution
+  inputs:
+    solution: '$(solution)'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  displayName: Run unit tests (dotnet core)
+  inputs:
+    command: 'test'
+    projects: '**/*tests.csproj'
+    arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
 
 - task: PowerShell@2
   displayName: Update DataverseTags solution version (unmanaged)
