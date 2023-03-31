@@ -76,20 +76,29 @@ steps:
         }
         $solutionXml.OuterXml | Out-File -FilePath $solutionFullPath -Encoding utf8 -NoNewline  
 
-- task: MSCRMPackSolution@12
-  displayName: Pack managed solution
+- task: PowerShell@2
+  displayName: 'Copy Nuget package into solutions folders'
   inputs:
-    unpackedFilesFolder: 'DataverseTags/solutions/DataverseTags_managed/src'
-    packageType: 'Managed'
-    includeVersionInSolutionFile: false
-    outputPath: '$(Build.ArtifactStagingDirectory)/solutions'
+    targetType: inline
+    script: |
+      New-Item -ItemType File -Path "DataverseTags/solutions/DataverseTags_managed/src/pluginpackages/pg_Pg.DataverseTags.Plugins/package/pg_Pg.DataverseTags.Plugins.nupkg" -Force 
+      Copy-Item "DataverseTags/src/backend/Pg.DataverseTags/Pg.DataverseTags.Plugins/bin/Release/Pg.DataverseTags.Plugins.1.0.0.nupkg" -Destination "DataverseTags/solutions/DataverseTags_managed/src/pluginpackages/pg_Pg.DataverseTags.Plugins/package/pg_Pg.DataverseTags.Plugins.nupkg" -Force
+      New-Item -ItemType File -Path "DataverseTags/solutions/DataverseTags/src/pluginpackages/pg_Pg.DataverseTags.Plugins/package/pg_Pg.DataverseTags.Plugins.nupkg" -Force 
+      Copy-Item "DataverseTags/src/backend/Pg.DataverseTags/Pg.DataverseTags.Plugins/bin/Release/Pg.DataverseTags.Plugins.1.0.0.nupkg" -Destination "DataverseTags/solutions/DataverseTags/src/pluginpackages/pg_Pg.DataverseTags.Plugins/package/pg_Pg.DataverseTags.Plugins.nupkg" -Force
 
-- task: MSCRMPackSolution@12
-  displayName: Pack unmanaged solution
+- task: PowerPlatformPackSolution@2
+  displayName: 'Pack managed solution file'
   inputs:
-    unpackedFilesFolder: 'DataverseTags/solutions/DataverseTags/src'
-    includeVersionInSolutionFile: false
-    outputPath: '$(Build.ArtifactStagingDirectory)/solutions'
+    SolutionSourceFolder: 'DataverseTags/solutions/DataverseTags_managed/src'''
+    SolutionOutputFile: '$(Build.ArtifactStagingDirectory)/solutions/DataverseTags_managed.zip'
+    SolutionType: 'Managed'
+
+- task: PowerPlatformPackSolution@2
+  displayName: 'Pack unmanaged solution file'
+  inputs:
+    SolutionSourceFolder: 'DataverseTags/solutions/DataverseTags_managed/src'''
+    SolutionOutputFile: '$(Build.ArtifactStagingDirectory)/solutions/DataverseTags.zip'
+    SolutionType: 'Unmanaged'
 
 # DataverseTags control related steps - start
 - task: Npm@1
