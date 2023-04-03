@@ -110,14 +110,14 @@ steps:
 - task: PowerPlatformPackSolution@2
   displayName: 'Pack managed solution file'
   inputs:
-    SolutionSourceFolder: 'DataverseTags/solutions/DataverseTags_managed/src'''
+    SolutionSourceFolder: 'DataverseTags/solutions/DataverseTags_managed/src'
     SolutionOutputFile: '$(Build.ArtifactStagingDirectory)/solutions/DataverseTags_managed.zip'
     SolutionType: 'Managed'
 
 - task: PowerPlatformPackSolution@2
   displayName: 'Pack unmanaged solution file'
   inputs:
-    SolutionSourceFolder: 'DataverseTags/solutions/DataverseTags_managed/src'''
+    SolutionSourceFolder: 'DataverseTags/solutions/DataverseTags_managed/src'
     SolutionOutputFile: '$(Build.ArtifactStagingDirectory)/solutions/DataverseTags.zip'
     SolutionType: 'Unmanaged'
 
