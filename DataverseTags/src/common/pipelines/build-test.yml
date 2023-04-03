@@ -23,6 +23,12 @@ variables:
   value: '1.0.$(Build.BuildId)'
 
 steps:
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'restore'
+    restoreSolution: '$(solution)'
+
 - task: CmdLine@2
   displayName: Install TypeScript compiler
   inputs:
