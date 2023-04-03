@@ -12,7 +12,7 @@ pool:
 
 variables:
 - name: solution
-  value: '**/*.sln'
+  value: 'DataverseTags/src/backend/Pg.DataverseTags/Pg.DataverseTags.sln'
 - name: buildPlatform
   value: 'Any CPU'
 - name: buildConfiguration
