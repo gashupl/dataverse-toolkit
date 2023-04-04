@@ -113,6 +113,7 @@ steps:
     SolutionSourceFolder: 'DataverseTags/solutions/DataverseTags_managed/src'
     SolutionOutputFile: '$(Build.ArtifactStagingDirectory)/solutions/DataverseTags_managed.zip'
     SolutionType: 'Managed'
+    MapFile: 'DataverseTags/configs/solution-mappings.xml'
 
 - task: PowerPlatformPackSolution@2
   displayName: 'Pack unmanaged solution file'
@@ -120,6 +121,7 @@ steps:
     SolutionSourceFolder: 'DataverseTags/solutions/DataverseTags_managed/src'
     SolutionOutputFile: '$(Build.ArtifactStagingDirectory)/solutions/DataverseTags.zip'
     SolutionType: 'Unmanaged'
+    MapFile: 'DataverseTags/configs/solution-mappings.xml'
 
 # DataverseTags control related steps - start
 - task: Npm@1
