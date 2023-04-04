@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<Mapping>
+  <FileToFile map="pluginpackages\pg_Pg.DataverseTags.Plugins\package\pg_Pg.DataverseTags.Plugins.nupkg" to=".\..\..\src\backend\Pg.DataverseTags\Pg.DataverseTags.Plugins\bin\Release\Pg.DataverseTags.Plugins.1.0.0.nupkg" />
+</Mapping>

@@ -11,6 +11,8 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
+- name: solution
+  value: 'DataverseTags/src/backend/Pg.DataverseTags/Pg.DataverseTags.sln'
 - name: buildPlatform
   value: 'Any CPU'
 - name: buildConfiguration
@@ -21,12 +23,18 @@ variables:
   value: '1.0.$(Build.BuildId)'
 
 steps:
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'restore'
+    restoreSolution: '$(solution)'
+
 - task: CmdLine@2
   displayName: Install TypeScript compiler
   inputs:
     script: 'npm install --save-dev typescript'
 
-- task: PowerPlatformToolInstaller@0
+- task: PowerPlatformToolInstaller@2
   displayName: Install Power Platform Tools (Including CLI) 
   inputs:
     DefaultVersion: true
@@ -36,13 +44,26 @@ steps:
     nugetFeed: 'official'
     psFeed: 'official'
 
+- task: VSBuild@1
+  displayName: Build VS solution
+  inputs:
+    solution: '$(solution)'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  displayName: Run unit tests (dotnet core)
+  inputs:
+    command: 'test'
+    projects: '**/*tests.csproj'
+    arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
 
 - task: PowerShell@2
   displayName: Update DataverseTags solution version (unmanaged)
   inputs:
     targetType: 'inline'
     script: |
-        $solutionFullPath = "solutions/DataverseTags/src/Other/Solution.xml"
+        $solutionFullPath = "DataverseTags/solutions/DataverseTags/src/Other/Solution.xml"
         $solutionXml = New-Object System.Xml.XmlDocument
         $solutionXml.PreserveWhitespace = $true
         $solutionXml.Load($solutionFullPath)
@@ -54,7 +75,7 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-        $solutionFullPath = "solutions/DataverseTags_managed/src/Other/Solution.xml"
+        $solutionFullPath = "DataverseTags/solutions/DataverseTags_managed/src/Other/Solution.xml"
         $solutionXml = New-Object System.Xml.XmlDocument
         $solutionXml.PreserveWhitespace = $true
         $solutionXml.Load($solutionFullPath)
@@ -66,7 +87,7 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-        $solutionFullPath = "src/frontend/Pg.DataverseTags/DataverseTags/ControlManifest.Input.xml"
+        $solutionFullPath = "DataverseTags/src/frontend/Pg.DataverseTags/DataverseTags/ControlManifest.Input.xml"
         $solutionXml = New-Object System.Xml.XmlDocument
         $solutionXml.PreserveWhitespace = $true
         $solutionXml.Load($solutionFullPath)
@@ -76,33 +97,44 @@ steps:
         }
         $solutionXml.OuterXml | Out-File -FilePath $solutionFullPath -Encoding utf8 -NoNewline  
 
-- task: MSCRMPackSolution@12
-  displayName: Pack managed solution
+- task: PowerShell@2
+  displayName: 'Copy Nuget package into solutions folders'
   inputs:
-    unpackedFilesFolder: 'solutions/DataverseTags_managed/src'
-    packageType: 'Managed'
-    includeVersionInSolutionFile: false
-    outputPath: '$(Build.ArtifactStagingDirectory)/solutions'
+    targetType: inline
+    script: |
+      New-Item -ItemType File -Path "DataverseTags/solutions/DataverseTags_managed/src/pluginpackages/pg_Pg.DataverseTags.Plugins/package/pg_Pg.DataverseTags.Plugins.nupkg" -Force 
+      Copy-Item "DataverseTags/src/backend/Pg.DataverseTags/Pg.DataverseTags.Plugins/bin/Release/Pg.DataverseTags.Plugins.1.0.0.nupkg" -Destination "DataverseTags/solutions/DataverseTags_managed/src/pluginpackages/pg_Pg.DataverseTags.Plugins/package/pg_Pg.DataverseTags.Plugins.nupkg" -Force
+      New-Item -ItemType File -Path "DataverseTags/solutions/DataverseTags/src/pluginpackages/pg_Pg.DataverseTags.Plugins/package/pg_Pg.DataverseTags.Plugins.nupkg" -Force 
+      Copy-Item "DataverseTags/src/backend/Pg.DataverseTags/Pg.DataverseTags.Plugins/bin/Release/Pg.DataverseTags.Plugins.1.0.0.nupkg" -Destination "DataverseTags/solutions/DataverseTags/src/pluginpackages/pg_Pg.DataverseTags.Plugins/package/pg_Pg.DataverseTags.Plugins.nupkg" -Force
 
-- task: MSCRMPackSolution@12
-  displayName: Pack unmanaged solution
+- task: PowerPlatformPackSolution@2
+  displayName: 'Pack managed solution file'
   inputs:
-    unpackedFilesFolder: 'solutions/DataverseTags/src'
-    includeVersionInSolutionFile: false
-    outputPath: '$(Build.ArtifactStagingDirectory)/solutions'
+    SolutionSourceFolder: 'DataverseTags/solutions/DataverseTags_managed/src'
+    SolutionOutputFile: '$(Build.ArtifactStagingDirectory)/solutions/DataverseTags_managed.zip'
+    SolutionType: 'Managed'
+    MapFile: 'DataverseTags/configs/solution-mappings.xml'
+
+- task: PowerPlatformPackSolution@2
+  displayName: 'Pack unmanaged solution file'
+  inputs:
+    SolutionSourceFolder: 'DataverseTags/solutions/DataverseTags/src'
+    SolutionOutputFile: '$(Build.ArtifactStagingDirectory)/solutions/DataverseTags.zip'
+    SolutionType: 'Unmanaged'
+    MapFile: 'DataverseTags/configs/solution-mappings.xml'
 
 # DataverseTags control related steps - start
 - task: Npm@1
   displayName: Install missing NPM packages for Demo PCF Control
   inputs:
-    workingDir: 'src/frontend/Pg.DataverseTags/DataverseTags/'
+    workingDir: 'DataverseTags/src/frontend/Pg.DataverseTags/DataverseTags/'
     customCommand: 'install --prefer-offline --no-audit --unsafe-perm=true'
 
 - task: Npm@1
   displayName: Build DataverseTags Control
   inputs:
     command: 'custom'
-    workingDir: 'src/frontend/Pg.DataverseTags/DataverseTags/'
+    workingDir: 'DataverseTags/src/frontend/Pg.DataverseTags/DataverseTags/'
     customCommand: 'run build'
 # DataverseTags control related steps - end
 
@@ -111,12 +143,12 @@ steps:
   inputs:
     targetType: 'inline'
     script: '& "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\MSBuild\Current\Bin\MSBuild.exe" /t:build /restore /p:configuration=Release'
-    workingDirectory: 'solutions/DataverseTagsControls'
+    workingDirectory: 'DataverseTags/solutions/DataverseTagsControls'
 
 - task: CopyFiles@2
   displayName: Copy DataverseTags control solutions to artifact folder
   inputs:
-    SourceFolder: '$(Build.SourcesDirectory)/solutions/DataverseTagsControls/bin/Release/'
+    SourceFolder: '$(Build.SourcesDirectory)/DataverseTags/solutions/DataverseTagsControls/bin/Release/'
     Contents: '**'
     TargetFolder: '$(Build.ArtifactStagingDirectory)/solutions'
 
