@@ -18,85 +18,141 @@ namespace Pg.SolutionDownloaderCore.Data
 			_logger = loggerFactory.CreateLogger<DataverseRepository>();
 		}
 
-        public void CreateSteps()
+        public PluginType GetPluginType(string assemblyName, string pluginName)
         {
             try
             {
-
-                //TODO: Implement step creation here...
-
                 //Retrieve Plugin Type to see if it is registered in Dataverse
                 using (var ctx = new DataverseContext(_service))
                 {
-					var query = ctx.CreateQuery<PluginType>()
-						.Where(x => x.assemblyname == "Pg.DataverseTags.Plugins"
-							&& x.name == "Pg.DataverseTags.Plugins.ValidateTagPlugin");
+                    var query = ctx.CreateQuery<PluginType>()
+                        .Where(x => x.assemblyname == "Pg.DataverseTags.Plugins"
+                            && x.name == "Pg.DataverseTags.Plugins.ValidateTagPlugin");
 
-					var pluginType = query.FirstOrDefault<PluginType>();
-					var id = pluginType.Id; 
+                    return query.FirstOrDefault<PluginType>();
                 }
+            }
+            catch (FaultException<OrganizationServiceFault> ex)
+            {
+                HandleException(ex);
+            }
+            catch (TimeoutException ex)
+            {
+                HandleException(ex);
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+            }
 
-				return; 
-                //Create
+            return null; 
+        }
+
+        public void CreateStep(Guid pluginId, Guid messageId)
+        {
+            try
+            {
                 var step = new SdkMessageProcessingStep();
                 step.name = "Pg.DataverseTags.Plugins.ValidateTagPlugin: Create of pg_tag";
                 step.description = "Pg.DataverseTags.Plugins.ValidateTagPlugin: Create of pg_tag";
                 step.mode = SdkMessageProcessingStep_mode.Synchronous;
-				step.rank = 1; //Execution Order
-				step.stage = SdkMessageProcessingStep_stage.Prevalidation;
-				step.supporteddeployment = SdkMessageProcessingStep_supporteddeployment.ServerOnly; 
-    //            step.plugintypeid = sdkPluginType.ToEntityReference();
-				//step.
-    //            step.sdkmessageid = new EntityReference(SdkMessage.EntityLogicalName, sdkMessageId.Value);
-              
+                step.rank = 1; //Execution Order
+                step.stage = SdkMessageProcessingStep_stage.Prevalidation;
+                step.supporteddeployment = SdkMessageProcessingStep_supporteddeployment.ServerOnly;
+                step.plugintypeid = new EntityReference(PluginType.EntityLogicalName, pluginId); 
+                step.sdkmessageid = new EntityReference(SdkMessage.EntityLogicalName, messageId);
+
                 _service.Create(step);
             }
-			catch (FaultException<OrganizationServiceFault> ex)
-			{
-				_logger.LogError("The application terminated with an error.");
-				_logger.LogError("Timestamp: {0}", ex.Detail.Timestamp);
-				_logger.LogError("Code: {0}", ex.Detail.ErrorCode);
-				_logger.LogError("Message: {0}", ex.Detail.Message);
-				_logger.LogError("Inner Fault: {0}",
-					null == ex.Detail.InnerFault ? "No Inner Fault" : "Has Inner Fault");
-
-				throw new DataverseCallException("Exception during solution export", ex); 
-			}
+            catch (FaultException<OrganizationServiceFault> ex)
+            {
+                HandleException(ex); 
+            } 
 			catch (TimeoutException ex)
 			{
-				_logger.LogError("The application terminated with an error.");
-				_logger.LogError("Message: {0}", ex.Message);
-				_logger.LogError("Stack Trace: {0}", ex.StackTrace);
-				_logger.LogError("Inner Fault: {0}",
-					null == ex?.InnerException?.Message ? "No Inner Fault" : ex.InnerException.Message);
-
-				throw new DataverseCallException("Exception during solution export", ex);
+                HandleException(ex); 
 			}
 			catch (Exception ex)
 			{
-				_logger.LogError("The application terminated with an error.");
-				_logger.LogError(ex.Message);
-
-				// Display the details of the inner exception.
-				if (ex.InnerException != null)
-				{
-					_logger.LogError(ex.InnerException.Message);
-
-					FaultException<OrganizationServiceFault> fe = ex.InnerException
-						as FaultException<OrganizationServiceFault>;
-					if (fe != null)
-					{
-						_logger.LogError("Timestamp: {0}", fe.Detail.Timestamp);
-						_logger.LogError("Code: {0}", fe.Detail.ErrorCode);
-						_logger.LogError("Message: {0}", fe.Detail.Message);
-						_logger.LogError("Trace: {0}", fe.Detail.TraceText);
-						_logger.LogError("Inner Fault: {0}", 
-							null == fe.Detail.InnerFault ? "No Inner Fault" : "Has Inner Fault");
-					}
-				}
-
-				throw new DataverseCallException("Exception during solution export", ex);
-			}
+                HandleException(ex); 
+            }
         }
-    }
+
+        public SdkMessage GetMessage(string messageName)
+        {
+            try
+            {
+                //Retrieve Plugin Type to see if it is registered in Dataverse
+                using (var ctx = new DataverseContext(_service))
+                {
+                    var query = ctx.CreateQuery<SdkMessage>()
+                        .Where(m => m.name == messageName);
+
+                    return query.FirstOrDefault<SdkMessage>();
+                }
+            }
+            catch (FaultException<OrganizationServiceFault> ex)
+            {
+                HandleException(ex);
+            }
+            catch (TimeoutException ex)
+            {
+                HandleException(ex);
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+            }
+
+            return null;
+        }
+
+        private void HandleException(FaultException<OrganizationServiceFault> ex)
+        {
+            _logger.LogError("The application terminated with an error.");
+            _logger.LogError("Timestamp: {0}", ex.Detail.Timestamp);
+            _logger.LogError("Code: {0}", ex.Detail.ErrorCode);
+            _logger.LogError("Message: {0}", ex.Detail.Message);
+            _logger.LogError("Inner Fault: {0}",
+                null == ex.Detail.InnerFault ? "No Inner Fault" : "Has Inner Fault");
+
+            throw new DataverseCallException("Exception during solution export", ex);
+
+        }
+        private void HandleException(TimeoutException ex)
+        {
+            _logger.LogError("The application terminated with an error.");
+            _logger.LogError("Message: {0}", ex.Message);
+            _logger.LogError("Stack Trace: {0}", ex.StackTrace);
+            _logger.LogError("Inner Fault: {0}",
+                null == ex?.InnerException?.Message ? "No Inner Fault" : ex.InnerException.Message);
+
+            throw new DataverseCallException("Exception during solution export", ex);
+        
+        }
+        private void HandleException(Exception ex)
+        {
+            _logger.LogError("The application terminated with an error.");
+            _logger.LogError(ex.Message);
+
+            // Display the details of the inner exception.
+            if (ex.InnerException != null)
+            {
+                _logger.LogError(ex.InnerException.Message);
+
+                FaultException<OrganizationServiceFault> fe = ex.InnerException
+                    as FaultException<OrganizationServiceFault>;
+                if (fe != null)
+                {
+                    _logger.LogError("Timestamp: {0}", fe.Detail.Timestamp);
+                    _logger.LogError("Code: {0}", fe.Detail.ErrorCode);
+                    _logger.LogError("Message: {0}", fe.Detail.Message);
+                    _logger.LogError("Trace: {0}", fe.Detail.TraceText);
+                    _logger.LogError("Inner Fault: {0}",
+                        null == fe.Detail.InnerFault ? "No Inner Fault" : "Has Inner Fault");
+                }
+            }
+            throw new DataverseCallException("Exception during solution export", ex);
+        }
+    }	
 }

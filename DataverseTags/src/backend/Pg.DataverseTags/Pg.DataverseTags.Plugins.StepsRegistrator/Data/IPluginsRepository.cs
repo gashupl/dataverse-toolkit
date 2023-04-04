@@ -1,9 +1,12 @@
-﻿using Pg.DataverseTags.Plugins.StepsRegistrator.Model;
+﻿using Pg.DataverseTags.Shared.Model;
+using System;
 
 namespace Pg.DataverseTags.Plugins.StepsRegistrator.Data
 {
     public interface IPluginsRepository
     {
-        void CreateSteps(); 
+        PluginType GetPluginType(string assemblyName, string pluginName);
+        void CreateStep(Guid pluginType, Guid messageId);
+        SdkMessage GetMessage(string messageName); 
     }
 }

@@ -24,8 +24,13 @@ namespace Pg.DataverseTags.Plugins.StepsRegistrator
                 var client = new CrmServiceClient(connectionString);
                 var loggerFactory = new LoggerFactory();
 
-                var repo = new DataverseRepository(client, loggerFactory); 
-                repo.CreateSteps(); 
+                var repo = new DataverseRepository(client, loggerFactory);
+                var plugin = repo.GetPluginType("Pg.DataverseTags.Plugins", 
+                    "Pg.DataverseTags.Plugins.ValidateTagPlugin");
+                var createMessage = repo.GetMessage("Create");
+                var updateMessage = repo.GetMessage("Update"); 
+                repo.CreateStep(plugin.Id, createMessage.Id);
+                repo.CreateStep(plugin.Id, updateMessage.Id); 
             }
             catch (Exception ex)
             {
