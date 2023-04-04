@@ -118,7 +118,7 @@ steps:
 - task: PowerPlatformPackSolution@2
   displayName: 'Pack unmanaged solution file'
   inputs:
-    SolutionSourceFolder: 'DataverseTags/solutions/DataverseTags_managed/src'
+    SolutionSourceFolder: 'DataverseTags/solutions/DataverseTags/src'
     SolutionOutputFile: '$(Build.ArtifactStagingDirectory)/solutions/DataverseTags.zip'
     SolutionType: 'Unmanaged'
     MapFile: 'DataverseTags/configs/solution-mappings.xml'
