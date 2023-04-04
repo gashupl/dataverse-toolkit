@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<Mapping>
+  <FileToFile map="PluginAssemblies\PgDataverseTagsPlugins-0D3945F2-137D-ED11-81AD-000D3AABDFEE\PgDataverseTagsPlugins.dll" to="..\..\..\src\backend\Pg.DataverseTags\Pg.DataverseTags.Plugins\bin\Release\net462\Pg.DataverseTags.Plugins.dll" />
+  <FileToFile map="pluginpackages\pg_Pg.DataverseTags.Plugins\package\pg_Pg.DataverseTags.Plugins.nupkg" to=".\..\..\src\backend\Pg.DataverseTags\Pg.DataverseTags.Plugins\bin\Release\Pg.DataverseTags.Plugins.1.0.0.nupkg" />
+</Mapping>
