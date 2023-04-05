@@ -1,9 +1,12 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Xrm.Tooling.Connector;
 using Pg.DataverseTags.Plugins.StepsRegistrator.Data;
+using Pg.DataverseTags.Shared.Common;
+using Pg.DataverseTags.Shared.Model;
 using Pg.SolutionDownloaderCore.Data;
 using Pg.SolutionDownloaderCore.Model;
 using System;
+using System.ServiceModel.Security;
 
 namespace Pg.DataverseTags.Plugins.StepsRegistrator
 {
@@ -27,10 +30,12 @@ namespace Pg.DataverseTags.Plugins.StepsRegistrator
                 var repo = new DataverseRepository(client, loggerFactory);
                 var plugin = repo.GetPluginType("Pg.DataverseTags.Plugins", 
                     "Pg.DataverseTags.Plugins.ValidateTagPlugin");
-                var createMessage = repo.GetMessage("Create");
-                var updateMessage = repo.GetMessage("Update"); 
-                repo.CreateStep(plugin.Id, createMessage.Id);
-                repo.CreateStep(plugin.Id, updateMessage.Id); 
+                var createFilter = repo.GetMessageFilter(pg_tag.EntityLogicalName, Messages.Create);
+                var updateFilter = repo.GetMessageFilter(pg_tag.EntityLogicalName, Messages.Update);
+                var createMessage = repo.GetMessage(Messages.Create);
+                var updateMessage = repo.GetMessage(Messages.Update); 
+                repo.CreateStep(plugin.Id, createFilter.Id, createMessage.Id, Messages.Create);
+                repo.CreateStep(plugin.Id, updateFilter.Id, updateMessage.Id, Messages.Update); 
             }
             catch (Exception ex)
             {
@@ -41,10 +46,7 @@ namespace Pg.DataverseTags.Plugins.StepsRegistrator
                 Console.WriteLine($"{InputArgumentReader.ClientSecretPrefix}value");
                 Console.WriteLine($"Optional parameters:");
                 Console.WriteLine($"{InputArgumentReader.ConfigurationPrefix}value");
-                return;
             }
-
-  
         }
     }
 }

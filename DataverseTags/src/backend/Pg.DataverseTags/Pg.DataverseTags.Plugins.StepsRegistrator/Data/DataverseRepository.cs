@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Xrm.Sdk;
+using Microsoft.Xrm.Sdk.Client;
 using Pg.DataverseTags.Plugins.StepsRegistrator.Data;
 using Pg.DataverseTags.Shared.Model;
 using System;
@@ -48,20 +49,20 @@ namespace Pg.SolutionDownloaderCore.Data
             return null; 
         }
 
-        public void CreateStep(Guid pluginId, Guid messageId)
+        public void CreateStep(Guid pluginId, Guid filterId, Guid messageId, string messageName)
         {
             try
             {
                 var step = new SdkMessageProcessingStep();
-                step.name = "Pg.DataverseTags.Plugins.ValidateTagPlugin: Create of pg_tag";
-                step.description = "Pg.DataverseTags.Plugins.ValidateTagPlugin: Create of pg_tag";
+                step.name = $"Pg.DataverseTags.Plugins.ValidateTagPlugin: {messageName} of pg_tag";
+                step.description = $"Pg.DataverseTags.Plugins.ValidateTagPlugin: {messageName} of pg_tag";
                 step.mode = SdkMessageProcessingStep_mode.Synchronous;
                 step.rank = 1; //Execution Order
                 step.stage = SdkMessageProcessingStep_stage.Prevalidation;
                 step.supporteddeployment = SdkMessageProcessingStep_supporteddeployment.ServerOnly;
                 step.plugintypeid = new EntityReference(PluginType.EntityLogicalName, pluginId); 
                 step.sdkmessageid = new EntityReference(SdkMessage.EntityLogicalName, messageId);
-
+                step.sdkmessagefilterid = new EntityReference(SdkMessageFilter.EntityLogicalName, filterId);
                 _service.Create(step);
             }
             catch (FaultException<OrganizationServiceFault> ex)
@@ -89,6 +90,40 @@ namespace Pg.SolutionDownloaderCore.Data
                         .Where(m => m.name == messageName);
 
                     return query.FirstOrDefault<SdkMessage>();
+                }
+            }
+            catch (FaultException<OrganizationServiceFault> ex)
+            {
+                HandleException(ex);
+            }
+            catch (TimeoutException ex)
+            {
+                HandleException(ex);
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+            }
+
+            return null;
+        }
+
+        public SdkMessageFilter GetMessageFilter(string entityLogicalName, string messageName)
+        {
+            try
+            {
+                using (var ctx = new DataverseContext(_service))
+                {
+                    return (from m in ctx.CreateQuery<SdkMessageFilter>()
+                            join a in ctx.CreateQuery<SdkMessage>()
+                            on m.sdkmessageid.Id equals a.sdkmessageid
+                            where m.primaryobjecttypecode == entityLogicalName
+                            && a.name == messageName
+                            select new SdkMessageFilter
+                            {
+                                sdkmessagefilterid = m.sdkmessagefilterid,
+                                sdkmessageid = m.sdkmessageid
+                            }).FirstOrDefault();
                 }
             }
             catch (FaultException<OrganizationServiceFault> ex)
