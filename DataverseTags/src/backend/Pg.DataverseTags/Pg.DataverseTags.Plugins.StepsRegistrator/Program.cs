@@ -35,7 +35,7 @@ namespace Pg.DataverseTags.Plugins.StepsRegistrator
                 var createMessage = repo.GetMessage(Messages.Create);
                 var updateMessage = repo.GetMessage(Messages.Update); 
                 repo.CreateStep(plugin.Id, createFilter.Id, createMessage.Id, Messages.Create);
-                repo.CreateStep(plugin.Id, updateFilter.Id, updateMessage.Id, Messages.Update); 
+                repo.CreateStep(plugin.Id, updateFilter.Id, updateMessage.Id, Messages.Update, pg_tag.Fields.pg_name); 
             }
             catch (Exception ex)
             {

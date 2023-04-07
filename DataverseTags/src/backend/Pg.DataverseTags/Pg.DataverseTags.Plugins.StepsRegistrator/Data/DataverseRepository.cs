@@ -49,7 +49,7 @@ namespace Pg.SolutionDownloaderCore.Data
             return null; 
         }
 
-        public void CreateStep(Guid pluginId, Guid filterId, Guid messageId, string messageName)
+        public void CreateStep(Guid pluginId, Guid filterId, Guid messageId, string messageName, string filteringAttributes = null)
         {
             try
             {
@@ -63,6 +63,7 @@ namespace Pg.SolutionDownloaderCore.Data
                 step.plugintypeid = new EntityReference(PluginType.EntityLogicalName, pluginId); 
                 step.sdkmessageid = new EntityReference(SdkMessage.EntityLogicalName, messageId);
                 step.sdkmessagefilterid = new EntityReference(SdkMessageFilter.EntityLogicalName, filterId);
+                step.filteringattributes = filteringAttributes;
                 _service.Create(step);
             }
             catch (FaultException<OrganizationServiceFault> ex)
