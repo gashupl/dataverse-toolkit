@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Xrm.Tooling.Connector;
 using Pg.DataverseTags.Plugins.StepsRegistrator.Data;
+using Pg.DataverseTags.Plugins.StepsRegistrator.Model;
 using Pg.DataverseTags.Shared.Common;
 using Pg.DataverseTags.Shared.Model;
 using Pg.SolutionDownloaderCore.Data;
@@ -34,8 +35,21 @@ namespace Pg.DataverseTags.Plugins.StepsRegistrator
                 var updateFilter = repo.GetMessageFilter(pg_tag.EntityLogicalName, Messages.Update);
                 var createMessage = repo.GetMessage(Messages.Create);
                 var updateMessage = repo.GetMessage(Messages.Update); 
-                repo.CreateStep(plugin.Id, createFilter.Id, createMessage.Id, Messages.Create);
-                repo.CreateStep(plugin.Id, updateFilter.Id, updateMessage.Id, Messages.Update, pg_tag.Fields.pg_name); 
+                repo.CreateStep(new CreateStepParam()
+                {
+                    PluginId = plugin.Id,
+                    FilterId = createFilter.Id,
+                    MessageId = createMessage.Id,
+                    MessageName = Messages.Create
+                });
+                repo.CreateStep(new CreateStepParam()
+                {
+                    PluginId = plugin.Id,
+                    FilterId = updateFilter.Id,
+                    MessageId = updateMessage.Id,
+                    MessageName = Messages.Update, 
+                    FilteringAttributes = pg_tag.Fields.pg_name
+                });
             }
             catch (Exception ex)
             {

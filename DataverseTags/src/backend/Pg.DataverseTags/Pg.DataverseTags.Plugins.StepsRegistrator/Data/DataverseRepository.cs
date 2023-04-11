@@ -2,6 +2,7 @@
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Client;
 using Pg.DataverseTags.Plugins.StepsRegistrator.Data;
+using Pg.DataverseTags.Plugins.StepsRegistrator.Model;
 using Pg.DataverseTags.Shared.Model;
 using System;
 using System.Linq;
@@ -49,21 +50,21 @@ namespace Pg.SolutionDownloaderCore.Data
             return null; 
         }
 
-        public void CreateStep(Guid pluginId, Guid filterId, Guid messageId, string messageName, string filteringAttributes = null)
+        public void CreateStep(CreateStepParam param)
         {
             try
             {
                 var step = new SdkMessageProcessingStep();
-                step.name = $"Pg.DataverseTags.Plugins.ValidateTagPlugin: {messageName} of pg_tag";
-                step.description = $"Pg.DataverseTags.Plugins.ValidateTagPlugin: {messageName} of pg_tag";
+                step.name = $"Pg.DataverseTags.Plugins.ValidateTagPlugin: {param.MessageName} of pg_tag";
+                step.description = $"Pg.DataverseTags.Plugins.ValidateTagPlugin: {param.MessageName} of pg_tag";
                 step.mode = SdkMessageProcessingStep_mode.Synchronous;
                 step.rank = 1; //Execution Order
                 step.stage = SdkMessageProcessingStep_stage.Prevalidation;
                 step.supporteddeployment = SdkMessageProcessingStep_supporteddeployment.ServerOnly;
-                step.plugintypeid = new EntityReference(PluginType.EntityLogicalName, pluginId); 
-                step.sdkmessageid = new EntityReference(SdkMessage.EntityLogicalName, messageId);
-                step.sdkmessagefilterid = new EntityReference(SdkMessageFilter.EntityLogicalName, filterId);
-                step.filteringattributes = filteringAttributes;
+                step.plugintypeid = new EntityReference(PluginType.EntityLogicalName, param.PluginId); 
+                step.sdkmessageid = new EntityReference(SdkMessage.EntityLogicalName, param.MessageId);
+                step.sdkmessagefilterid = new EntityReference(SdkMessageFilter.EntityLogicalName, param.FilterId);
+                step.filteringattributes = param.FilteringAttributes;
                 _service.Create(step);
             }
             catch (FaultException<OrganizationServiceFault> ex)

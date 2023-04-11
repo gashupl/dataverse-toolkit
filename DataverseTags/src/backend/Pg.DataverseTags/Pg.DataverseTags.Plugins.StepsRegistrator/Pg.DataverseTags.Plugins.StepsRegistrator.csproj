@@ -144,6 +144,7 @@
     <Compile Include="Data\DataverseRepository.cs" />
     <Compile Include="Data\InputArgumentReader.cs" />
     <Compile Include="Data\IPluginsRepository.cs" />
+    <Compile Include="Model\CreateStepParam.cs" />
     <Compile Include="Model\InputDto.cs" />
     <Compile Include="Model\PluginStepConfig.cs" />
     <Compile Include="Program.cs" />
