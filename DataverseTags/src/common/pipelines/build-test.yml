@@ -162,7 +162,7 @@ steps:
 - task: CopyFiles@2
   displayName: Copy Plugin Registration steps binaries into artifacts folder
   inputs:
-    SourceFolder: '$(Build.SourcesDirectory)/DataverseTags/src/Pg.DataverseTags.Plugins.StepsRegistrator/bin/Release/'
+    SourceFolder: '$(Build.SourcesDirectory)/DataverseTags/src/backend/Pg.DataverseTags/Pg.DataverseTags.Plugins.StepsRegistrator/bin/Release/'
     Contents: '**'
     TargetFolder: '$(Build.ArtifactStagingDirectory)/release'
 
