@@ -27,7 +27,9 @@ write-host "Solution $controlsSolutionPath imported";
 write-host "Importing solution $customizationSolutionPath  ...";
 pac solution import --path $customizationSolutionPath 
 write-host "Solution $customizationSolutionPath imported";
-
+write-host "Registering plugins and steps..."
+.\Release\Pg.DataverseTags.Plugins.StepsRegistrator.exe -url:$url -appId:$appId -clientSecret:$secret
+write-host "Plugins and steps registered"
 write-host "Deleting authentication profile $name";
 pac auth delete --name $name
 write-host "Deleting authentication $name profile deleted";
