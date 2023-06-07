@@ -34,13 +34,14 @@ export class TagPickerControl extends React.Component<ITagPickerControlProps> {
 
     this.setData = this.setData.bind(this);
 
-    this.dataService = new DataLayerService(props.controlContext.webAPI);
-    this.dataService.getActiveTags(this.setData, this.handleErrors); 
-
     if (props.tags) {
       var tags = props.tags.split(';');
       this.state.selectedTags = tags;
     }  
+
+    this.dataService = new DataLayerService(props.controlContext.webAPI);
+    this.dataService.getActiveTags(this.setData, this.handleErrors); 
+
   }
 
   public render(): React.ReactNode {
@@ -76,7 +77,7 @@ export class TagPickerControl extends React.Component<ITagPickerControlProps> {
         value: item.pg_name
       })
     );
-
+    list = list.concat(this.state.selectedTags);
     this.setState({ tags: list })
   }
 
