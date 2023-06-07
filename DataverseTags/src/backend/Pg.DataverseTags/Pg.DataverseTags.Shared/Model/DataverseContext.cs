@@ -5,7 +5,7 @@
 //     Changes to this file may cause incorrect behavior and will be lost if
 //     the code is regenerated.
 // </auto-generated>
-// Created via this command line: "C:\Users\PiotrGaszewski\AppData\Roaming\MscrmTools\XrmToolBox\Plugins\DLaB.EarlyBoundGenerator\crmsvcutil.exe" /url:"https://piotrg.api.crm4.dynamics.com" /namespace:"Pg.DataverseTags.Shared.Model" /SuppressGeneratedCodeAttribute /out:"C:\Users\PiotrGaszewski\AppData\Roaming\MscrmTools\XrmToolBox\Settings\EBG\DataverseContext.cs" /servicecontextname:"DataverseContext" /codecustomization:"DLaB.CrmSvcUtilExtensions.Entity.CustomizeCodeDomService,DLaB.CrmSvcUtilExtensions" /codegenerationservice:"DLaB.CrmSvcUtilExtensions.Entity.CustomCodeGenerationService,DLaB.CrmSvcUtilExtensions" /codewriterfilter:"DLaB.CrmSvcUtilExtensions.Entity.CodeWriterFilterService,DLaB.CrmSvcUtilExtensions" /namingservice:"DLaB.CrmSvcUtilExtensions.NamingService,DLaB.CrmSvcUtilExtensions" /metadataproviderservice:"DLaB.CrmSvcUtilExtensions.Entity.MetadataProviderService,DLaB.CrmSvcUtilExtensions" 
+// Created via this command line: "C:\Users\PiotrGaszewski\AppData\Roaming\MscrmTools\XrmToolBox\Plugins\DLaB.EarlyBoundGenerator\crmsvcutil.exe" /url:"https://piotrg.api.crm4.dynamics.com" /namespace:"Pg.DataverseTags.Shared.Model" /SuppressGeneratedCodeAttribute /out:"C:\Users\PiotrGaszewski\source\github\dataverse-toolkit\DataverseTags\configs\Tags\DataverseContext.cs" /servicecontextname:"DataverseContext" /codecustomization:"DLaB.CrmSvcUtilExtensions.Entity.CustomizeCodeDomService,DLaB.CrmSvcUtilExtensions" /codegenerationservice:"DLaB.CrmSvcUtilExtensions.Entity.CustomCodeGenerationService,DLaB.CrmSvcUtilExtensions" /codewriterfilter:"DLaB.CrmSvcUtilExtensions.Entity.CodeWriterFilterService,DLaB.CrmSvcUtilExtensions" /namingservice:"DLaB.CrmSvcUtilExtensions.NamingService,DLaB.CrmSvcUtilExtensions" /metadataproviderservice:"DLaB.CrmSvcUtilExtensions.Entity.MetadataProviderService,DLaB.CrmSvcUtilExtensions" 
 //------------------------------------------------------------------------------
 
 [assembly: Microsoft.Xrm.Sdk.Client.ProxyTypesAssemblyAttribute()]
@@ -38,6 +38,90 @@ namespace Pg.DataverseTags.Shared.Model
 			get
 			{
 				return this.CreateQuery<Pg.DataverseTags.Shared.Model.pg_tag>();
+			}
+		}
+		
+		/// <summary>
+		/// Gets a binding to the set of all <see cref="Pg.DataverseTags.Shared.Model.PluginAssembly"/> entities.
+		/// </summary>
+		public System.Linq.IQueryable<Pg.DataverseTags.Shared.Model.PluginAssembly> PluginAssemblySet
+		{
+			[System.Diagnostics.DebuggerNonUserCode()]
+			get
+			{
+				return this.CreateQuery<Pg.DataverseTags.Shared.Model.PluginAssembly>();
+			}
+		}
+		
+		/// <summary>
+		/// Gets a binding to the set of all <see cref="Pg.DataverseTags.Shared.Model.PluginType"/> entities.
+		/// </summary>
+		public System.Linq.IQueryable<Pg.DataverseTags.Shared.Model.PluginType> PluginTypeSet
+		{
+			[System.Diagnostics.DebuggerNonUserCode()]
+			get
+			{
+				return this.CreateQuery<Pg.DataverseTags.Shared.Model.PluginType>();
+			}
+		}
+		
+		/// <summary>
+		/// Gets a binding to the set of all <see cref="Pg.DataverseTags.Shared.Model.SdkMessage"/> entities.
+		/// </summary>
+		public System.Linq.IQueryable<Pg.DataverseTags.Shared.Model.SdkMessage> SdkMessageSet
+		{
+			[System.Diagnostics.DebuggerNonUserCode()]
+			get
+			{
+				return this.CreateQuery<Pg.DataverseTags.Shared.Model.SdkMessage>();
+			}
+		}
+		
+		/// <summary>
+		/// Gets a binding to the set of all <see cref="Pg.DataverseTags.Shared.Model.SdkMessageFilter"/> entities.
+		/// </summary>
+		public System.Linq.IQueryable<Pg.DataverseTags.Shared.Model.SdkMessageFilter> SdkMessageFilterSet
+		{
+			[System.Diagnostics.DebuggerNonUserCode()]
+			get
+			{
+				return this.CreateQuery<Pg.DataverseTags.Shared.Model.SdkMessageFilter>();
+			}
+		}
+		
+		/// <summary>
+		/// Gets a binding to the set of all <see cref="Pg.DataverseTags.Shared.Model.SdkMessageProcessingStep"/> entities.
+		/// </summary>
+		public System.Linq.IQueryable<Pg.DataverseTags.Shared.Model.SdkMessageProcessingStep> SdkMessageProcessingStepSet
+		{
+			[System.Diagnostics.DebuggerNonUserCode()]
+			get
+			{
+				return this.CreateQuery<Pg.DataverseTags.Shared.Model.SdkMessageProcessingStep>();
+			}
+		}
+		
+		/// <summary>
+		/// Gets a binding to the set of all <see cref="Pg.DataverseTags.Shared.Model.SdkMessageProcessingStepImage"/> entities.
+		/// </summary>
+		public System.Linq.IQueryable<Pg.DataverseTags.Shared.Model.SdkMessageProcessingStepImage> SdkMessageProcessingStepImageSet
+		{
+			[System.Diagnostics.DebuggerNonUserCode()]
+			get
+			{
+				return this.CreateQuery<Pg.DataverseTags.Shared.Model.SdkMessageProcessingStepImage>();
+			}
+		}
+		
+		/// <summary>
+		/// Gets a binding to the set of all <see cref="Pg.DataverseTags.Shared.Model.SdkMessageProcessingStepSecureConfig"/> entities.
+		/// </summary>
+		public System.Linq.IQueryable<Pg.DataverseTags.Shared.Model.SdkMessageProcessingStepSecureConfig> SdkMessageProcessingStepSecureConfigSet
+		{
+			[System.Diagnostics.DebuggerNonUserCode()]
+			get
+			{
+				return this.CreateQuery<Pg.DataverseTags.Shared.Model.SdkMessageProcessingStepSecureConfig>();
 			}
 		}
 	}

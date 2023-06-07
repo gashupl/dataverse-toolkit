@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pg.DataverseTags.Plugins.Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pg.DataverseTags.Shared", "Pg.DataverseTags.Shared\Pg.DataverseTags.Shared.csproj", "{F408AEE0-FED9-456A-B609-179C09C5DC18}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pg.DataverseTags.Plugins.StepsRegistrator", "Pg.DataverseTags.Plugins.StepsRegistrator\Pg.DataverseTags.Plugins.StepsRegistrator.csproj", "{028605F3-3491-48EC-9BB7-B40C021D7669}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{F408AEE0-FED9-456A-B609-179C09C5DC18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F408AEE0-FED9-456A-B609-179C09C5DC18}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F408AEE0-FED9-456A-B609-179C09C5DC18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{028605F3-3491-48EC-9BB7-B40C021D7669}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{028605F3-3491-48EC-9BB7-B40C021D7669}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{028605F3-3491-48EC-9BB7-B40C021D7669}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{028605F3-3491-48EC-9BB7-B40C021D7669}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
