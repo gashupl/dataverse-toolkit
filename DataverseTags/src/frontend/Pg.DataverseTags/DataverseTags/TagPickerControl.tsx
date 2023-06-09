@@ -77,7 +77,16 @@ export class TagPickerControl extends React.Component<ITagPickerControlProps> {
         value: item.pg_name
       })
     );
-    list = list.concat(this.state.selectedTags);
+
+    for(var i = 0; i < this.state.selectedTags.length; i++) {
+      var selectedTag = this.state.selectedTags[i]; 
+      if (list.filter(e => e.label === selectedTag).length === 0) {
+        list.push({
+          label: selectedTag,
+          value: selectedTag
+        }); 
+      }
+    }
     this.setState({ tags: list })
   }
 
