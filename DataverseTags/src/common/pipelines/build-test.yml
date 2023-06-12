@@ -71,7 +71,7 @@ steps:
         $solutionXml.OuterXml | Out-File -FilePath $solutionFullPath -Encoding utf8 -NoNewline  
 
 - task: PowerShell@2
-  displayName: Update DataverseTags solution version (managed)
+  displayName: Update DataverseTags control version (managed)
   inputs:
     targetType: 'inline'
     script: |
