@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ImportExportXml version="9.2.23022.178" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ImportExportXml version="9.2.23071.162" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SolutionManifest>
     <UniqueName>DataverseTags</UniqueName>
     <LocalizedNames>
@@ -86,6 +86,8 @@
       <RootComponent type="61" schemaName="pg_/img/test.svg" behavior="0" />
       <RootComponent type="62" schemaName="pg_TagsManagement" behavior="0" />
       <RootComponent type="80" schemaName="pg_TagsManagement" behavior="0" />
+      <RootComponent type="92" id="{9344b20e-147d-ed11-81ad-000d3aabdfee}" behavior="0" />
+      <RootComponent type="92" id="{fa99333d-147d-ed11-81ad-000d3aabdfee}" behavior="0" />
     </RootComponents>
     <MissingDependencies>
       <MissingDependency>
