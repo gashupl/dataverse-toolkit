@@ -1,8 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<SdkMessageProcessingStep Name="Pg.DataverseTags.Plugins.ValidateTagPlugin: Create of pg_tag" SdkMessageProcessingStepId="{9344b20e-147d-ed11-81ad-000d3aabdfee}" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<SdkMessageProcessingStep Name="Pg.DataverseTags.Plugins.ValidateTagPlugin: Create of pg_tag" SdkMessageProcessingStepId="{0d958612-c932-ee11-bdf4-000d3aabdfee}" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SdkMessageId>9ebdbb1b-ea3e-db11-86a7-000a3a5473e8</SdkMessageId>
-  <PluginTypeName>Pg.DataverseTags.Plugins.ValidateTagPlugin, Pg.DataverseTags.Plugins, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f98df4587095149c</PluginTypeName>
-  <PluginTypeId>0e3945f2-137d-ed11-81ad-000d3aabdfee</PluginTypeId>
+  <PluginTypeExportKey>9E18550CA4DFA2C84EAFBE6E73EAF59821A74F045C128EF2E3E18A121186E563</PluginTypeExportKey>
   <PrimaryEntity>pg_tag</PrimaryEntity>
   <AsyncAutoDelete>0</AsyncAutoDelete>
   <Description>Pg.DataverseTags.Plugins.ValidateTagPlugin: Create of pg_tag</Description>

@@ -86,8 +86,9 @@
       <RootComponent type="61" schemaName="pg_/img/test.svg" behavior="0" />
       <RootComponent type="62" schemaName="pg_TagsManagement" behavior="0" />
       <RootComponent type="80" schemaName="pg_TagsManagement" behavior="0" />
-      <RootComponent type="92" id="{9344b20e-147d-ed11-81ad-000d3aabdfee}" behavior="0" />
-      <RootComponent type="92" id="{fa99333d-147d-ed11-81ad-000d3aabdfee}" behavior="0" />
+      <RootComponent type="91" id="{27495d00-c932-ee11-bdf4-000d3aabdfee}" schemaName="Pg.DataverseTags.Plugins, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f98df4587095149c" behavior="0" />
+      <RootComponent type="92" id="{0d958612-c932-ee11-bdf4-000d3aabdfee}" behavior="0" />
+      <RootComponent type="92" id="{5214ec1e-c932-ee11-bdf4-000d3aabdfee}" behavior="0" />
     </RootComponents>
     <MissingDependencies>
       <MissingDependency>

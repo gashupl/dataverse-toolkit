@@ -1,4 +1,5 @@
 <pluginpackage uniquename="pg_Pg.DataverseTags.Plugins">
+  <exportkeyversion>1</exportkeyversion>
   <iscustomizable>1</iscustomizable>
   <name>pg_Pg.DataverseTags.Plugins</name>
   <package mimetype="application/octet-stream">pg_Pg.DataverseTags.Plugins.nupkg</package>
