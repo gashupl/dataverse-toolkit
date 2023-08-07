@@ -164,20 +164,6 @@ steps:
     Contents: '**'
     TargetFolder: '$(Build.ArtifactStagingDirectory)/solutions'
 
-- task: CopyFiles@2
-  displayName: Copy Installation script into to artifacts folder
-  inputs:
-    SourceFolder: '$(Build.SourcesDirectory)/DataverseTags/scripts/install/'
-    Contents: 'install.ps1'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
-
-- task: CopyFiles@2
-  displayName: Copy Plugin Registration steps binaries into artifacts folder
-  inputs:
-    SourceFolder: '$(Build.SourcesDirectory)/DataverseTags/src/backend/Pg.DataverseTags/Pg.DataverseTags.Plugins.StepsRegistrator/bin/Release/'
-    Contents: '**'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)/release'
-
 - task: PublishBuildArtifacts@1
   displayName: Publish build artifacts
   inputs:
