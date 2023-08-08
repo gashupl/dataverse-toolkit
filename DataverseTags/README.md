@@ -1,20 +1,21 @@
 # Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+DataverseTags is Datavese solutions set making tagging Datavese records from Power Platform Model Driven App very simple.  
+1. Default Tags database.
+2. Adding default and user-defined tags on the model-driven app form
+   
+   ![alt text](https://raw.githubusercontent.com/gashupl/dataverse-toolkit/feature/nuget-plugins-solution-test/DataverseTags/docs/images/01.png?raw=true)
+   
+4. Searching records by tag(s). 
 
+# Installation
+1.	Download and open latest release of DataverseTags
+2.	Import DataverseTagsControls.zip managed solution into your Dataverse environment.
+3.	Import DataverseTags_managed.zip solution into your Dataverse environment.
+   
 # Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+1. Open the **Tags Management** mobile-driven app and go to the Tags list inside the Administration section. This is the place where you may add default tags, which will be suggested on every record with tag functionality configured. This is an optional step, so if you don't want to configure default tags, just leave it as is.
+2. For using tags functionality on the specific form, open it inside Power App Maker Studio and select DataverseTags as a default component on the text column, which will be used for storing information about used tags.
+   
+   ![alt text](https://raw.githubusercontent.com/gashupl/dataverse-toolkit/feature/nuget-plugins-solution-test/DataverseTags/docs/images/02.png?raw=true)
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
-
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
-
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+3. For searching records by tags, just add the previously mentioned column as a searchable one for Power Platform model-driven apps search functionalities.
