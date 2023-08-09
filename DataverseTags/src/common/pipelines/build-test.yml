@@ -164,6 +164,13 @@ steps:
     Contents: '**'
     TargetFolder: '$(Build.ArtifactStagingDirectory)/solutions'
 
+- task: CopyFiles@2
+  displayName: Copy Readme file into solutions folder
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)/DataverseTags/docs/'
+    Contents: 'README.url'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)/solutions'
+
 - task: PublishBuildArtifacts@1
   displayName: Publish build artifacts
   inputs:
