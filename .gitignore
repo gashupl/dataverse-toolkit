@@ -23,3 +23,4 @@
 /DataverseTags/src/backend/Pg.DataverseTags/Pg.DataverseTags.Plugins.StepsRegistrator/bin/Debug
 /DataverseTags/src/backend/Pg.DataverseTags/Pg.DataverseTags.Plugins.StepsRegistrator/obj/Debug
 *.user
+/DataverseKafka/src/Pg.Dataverse.Kafka/.vs/Pg.Dataverse.Kafka
