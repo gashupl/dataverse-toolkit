@@ -1,5 +1,6 @@
 using Confluent.Kafka;
 using Microsoft.Xrm.Sdk;
+using Pg.Dataverse.Kafka.Plugin.Model;
 using System;
 
 namespace Pg.Dataverse.Kafka.Plugin
@@ -28,17 +29,18 @@ namespace Pg.Dataverse.Kafka.Plugin
                 var entity = (Entity)context.InputParameters["Target"];
 
                 // Check for entity name on which this plugin would be registered
-                if (entity.LogicalName == nameof(TaskPlugin))
+                if (entity.LogicalName == Task.EntityLogicalName)
                 { 
                     var config = new ProducerConfig
                     {
                         BootstrapServers = "host1:9092",
                     };
 
-                    using (var producer = new ProducerBuilder<Null, string>(config).Build())
-                    {
-                        //...
-                    }
+                    new InvalidPluginExecutionException("Yes, it is working!"); 
+                    //using (var producer = new ProducerBuilder<Null, string>(config).Build())
+                    //{
+                    //    //...
+                    //}
                 }
             }
         }
