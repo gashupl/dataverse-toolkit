@@ -1,19 +1,12 @@
 ﻿################################################################################
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
-
-/SolutionDownloaderCore/src/Pg.SolutionDownloaderCore/.vs/Pg.SolutionDownloaderCore
 /SolutionDownloaderCore/src/Pg.SolutionDownloaderCore/Pg.SolutionDownloaderCore/bin/Debug/net7.0
 /SolutionDownloaderCore/src/Pg.SolutionDownloaderCore/Pg.SolutionDownloaderCore/obj/Debug/net7.0/ref/Pg.SolutionDownloaderCore.dll
 /SolutionDownloaderCore/src/Pg.SolutionDownloaderCore/Pg.SolutionDownloaderCore/obj
-/SolutionDownloaderCore/src/Pg.SolutionDownloaderCore/.vs/ProjectEvaluation
 /SolutionDownloaderCore/src/Pg.SolutionDownloaderCore/Pg.SolutionDownloaderCore.Tests/bin/Debug/net7.0
 /SolutionDownloaderCore/src/Pg.SolutionDownloaderCore/Pg.SolutionDownloaderCore.Tests/obj
-/DataverseTags/src/backend/Pg.DataverseTags/.vs/Pg.DataverseTags/v17
-/DataverseTags/src/backend/Pg.DataverseTags/.vs/Pg.DataverseTags/config
-/DataverseTags/src/backend/Pg.DataverseTags/.vs/Pg.DataverseTags/FileContentIndex
 /DataverseTags/src/backend/Pg.DataverseTags/Pg.DataverseTags.Plugins/.vscode
-/DataverseTags/src/backend/Pg.DataverseTags/.vs
 /DataverseTags/src/backend/Pg.DataverseTags/packages
 /DataverseTags/src/backend/Pg.DataverseTags/Pg.DataverseTags.Plugins.Tests/bin/Debug
 /DataverseTags/src/backend/Pg.DataverseTags/Pg.DataverseTags.Plugins.Tests/obj/Debug/.NETFramework,Version=v4.6.2.AssemblyAttributes.cs
@@ -23,4 +16,4 @@
 /DataverseTags/src/backend/Pg.DataverseTags/Pg.DataverseTags.Plugins.StepsRegistrator/bin/Debug
 /DataverseTags/src/backend/Pg.DataverseTags/Pg.DataverseTags.Plugins.StepsRegistrator/obj/Debug
 *.user
-/DataverseKafka/src/Pg.Dataverse.Kafka/.vs/Pg.Dataverse.Kafka
+**/.vs/*
