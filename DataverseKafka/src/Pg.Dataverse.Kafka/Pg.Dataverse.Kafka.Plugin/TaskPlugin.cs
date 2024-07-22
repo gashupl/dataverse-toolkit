@@ -30,7 +30,7 @@ namespace Pg.Dataverse.Kafka.Plugin
 
                 // Check for entity name on which this plugin would be registered
                 if (entity.LogicalName == Task.EntityLogicalName)
-                { 
+                {
                     var config = new ProducerConfig
                     {
                         BootstrapServers = "host1:9092",
