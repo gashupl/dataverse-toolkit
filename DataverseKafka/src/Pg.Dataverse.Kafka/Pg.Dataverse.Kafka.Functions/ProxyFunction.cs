@@ -10,10 +10,13 @@ namespace Pg.Dataverse.Kafka.Functions
 {
     public class ProxyFunction
     {
+        private const string _topic = "dataverse-task-topic";
+        private readonly IProducer<String, String> _producer;
         private readonly ILogger<ProxyFunction> _logger;
 
-        public ProxyFunction(ILogger<ProxyFunction> logger)
+        public ProxyFunction(IProducer<String, String> producer, ILogger<ProxyFunction> logger)
         {
+            _producer = producer;
             _logger = logger;
         }
 
@@ -38,19 +41,15 @@ namespace Pg.Dataverse.Kafka.Functions
                 {
                     Entity target = (Entity)remoteExecutionContext.InputParameters["Target"];
                     var task = target.ToEntity<Model.Task>();
-                    // Process the create operation for the contact entity
-                    _logger.LogInformation("Processing create operation for contact entity.");
 
-                    var config = new ProducerConfig
+                    var result = await _producer.ProduceAsync(_topic, new Message<String, String>
                     {
-                        BootstrapServers = "host1:9092",
-                    };
+                        Value = task.Subject
+                    });
 
-                    //using (var producer = new ProducerBuilder<Null, string>(config).Build())
-                    //{
-                    //    //...
-                    //}
-                    return new OkObjectResult(task.Subject);
+                    _producer.Flush();
+
+                    return new OkObjectResult(result);
                 }
             }
 
