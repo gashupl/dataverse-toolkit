@@ -3,9 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pg.Dataverse.Kafka.Plugin", "Pg.Dataverse.Kafka.Plugin\Pg.Dataverse.Kafka.Plugin.csproj", "{20516796-4C5A-4A32-B4AA-9D1498988F80}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pg.Dataverse.Kafka.Functions", "Pg.Dataverse.Kafka.Functions\Pg.Dataverse.Kafka.Functions.csproj", "{A5AFC5AD-6FB6-4600-8B1E-E9A7966FC6AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pg.Dataverse.Kafka.Functions", "Pg.Dataverse.Kafka.Functions\Pg.Dataverse.Kafka.Functions.csproj", "{A5AFC5AD-6FB6-4600-8B1E-E9A7966FC6AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,10 +11,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{20516796-4C5A-4A32-B4AA-9D1498988F80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{20516796-4C5A-4A32-B4AA-9D1498988F80}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{20516796-4C5A-4A32-B4AA-9D1498988F80}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{20516796-4C5A-4A32-B4AA-9D1498988F80}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A5AFC5AD-6FB6-4600-8B1E-E9A7966FC6AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A5AFC5AD-6FB6-4600-8B1E-E9A7966FC6AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5AFC5AD-6FB6-4600-8B1E-E9A7966FC6AF}.Release|Any CPU.ActiveCfg = Release|Any CPU

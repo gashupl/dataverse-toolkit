@@ -1,3 +1,4 @@
+using Confluent.Kafka;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
@@ -41,6 +42,16 @@ namespace Pg.Dataverse.Kafka.Functions
                 var task = target.ToEntity<Model.Task>(); 
                 // Process the create operation for the contact entity
                 _logger.LogInformation("Processing create operation for contact entity.");
+
+                var config = new ProducerConfig
+                {
+                    BootstrapServers = "host1:9092",
+                };
+
+                //using (var producer = new ProducerBuilder<Null, string>(config).Build())
+                //{
+                //    //...
+                //}
             }
 
             return new OkObjectResult("OK!");
