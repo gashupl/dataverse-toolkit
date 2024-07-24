@@ -2,9 +2,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System.Text.Json.Nodes;
+using Microsoft.Xrm.Sdk;
+using System.Runtime.Serialization.Json;
+using System.Text;
 
 namespace Pg.Dataverse.Kafka.Functions
 {
@@ -23,25 +23,57 @@ namespace Pg.Dataverse.Kafka.Functions
             _logger.LogInformation("Received a webhook call from Dataverse.");
 
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            JObject data = JObject.Parse(requestBody);
+            string jsonContext = FormatJson(requestBody);
 
-            // Assuming the payload contains an entity name and operation
-            JToken? entityName = data?["PrimaryEntityName"];
-            JToken? operation = data?["MessageName"];
+            //JObject data = JObject.Parse(requestBody);
+            var remoteExecutionContext = DeserializeJsonString<RemoteExecutionContext>(jsonContext);
+
+            string entityName = remoteExecutionContext.PrimaryEntityName;
+            string operation = remoteExecutionContext.MessageName; 
 
             _logger.LogInformation($"Entity: {entityName?.ToString()}, Operation: {operation?.ToString()}");
 
             // Here you can add your logic to handle different entities and operations
             // For example, processing a create operation for a specific entity
-            if (entityName.ToString() == "task" && operation.ToString() == "Create")
+            if (entityName == "task" && operation == "Create")
             {
+                Entity target = (Entity)remoteExecutionContext.InputParameters["Target"];
+                var task = target.ToEntity<Model.Task>(); 
                 // Process the create operation for the contact entity
                 _logger.LogInformation("Processing create operation for contact entity.");
             }
 
             return new OkObjectResult("OK!");
+
+            //TODO: Check this method: https://www.inogic.com/blog/2018/06/parse-json-string-that-represents-the-dynamics-365-plugin-execution-context-received-in-azure-function/
         }
 
+        public static string FormatJson(string unformattedJson)
+        {
+            string formattedJson = string.Empty;
+            try
+            {
+                formattedJson = unformattedJson.Trim('"');
+                formattedJson = System.Text.RegularExpressions.Regex.Unescape(formattedJson);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            return formattedJson;
+        }
+
+        public static RemoteContextType DeserializeJsonString<RemoteContextType>(string jsonString)
+        {
+            //create an instance of generic type object
+            var obj = Activator.CreateInstance<RemoteContextType>();
+            var ms = new MemoryStream(Encoding.Unicode.GetBytes(jsonString));
+            var serializer = new DataContractJsonSerializer(obj.GetType());
+            obj = (RemoteContextType)serializer.ReadObject(ms);
+            ms.Close();
+            return obj;
+        }
 
     }
 }
