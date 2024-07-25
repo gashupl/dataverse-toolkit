@@ -23,40 +23,53 @@ namespace Pg.Dataverse.Kafka.Functions
         [Function("ProxyFunction")]
         public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequest req)
         {
-            _logger.LogInformation("Received a webhook call from Dataverse.");
-
-            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            string jsonContext = JsonHelper.FormatJson(requestBody);
-
-            var remoteExecutionContext = JsonHelper.DeserializeJsonString<RemoteExecutionContext>(jsonContext);
-
-            if(remoteExecutionContext != null)
+            try
             {
-                string entityName = remoteExecutionContext.PrimaryEntityName;
-                string operation = remoteExecutionContext.MessageName;
+                _logger.LogInformation("Received a webhook call from Dataverse.");
 
-                _logger.LogInformation($"Entity: {entityName?.ToString()}, Operation: {operation?.ToString()}");
+                string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+                string jsonContext = JsonHelper.FormatJson(requestBody);
 
-                if (entityName == "task" && operation == "Create")
+                var remoteExecutionContext = JsonHelper.DeserializeJsonString<RemoteExecutionContext>(jsonContext);
+
+                if (remoteExecutionContext != null)
                 {
-                    Entity target = (Entity)remoteExecutionContext.InputParameters["Target"];
-                    var task = target.ToEntity<Model.Task>();
+                    string entityName = remoteExecutionContext.PrimaryEntityName;
+                    string operation = remoteExecutionContext.MessageName;
 
-                    var result = await _producer.ProduceAsync(_topic, new Message<String, String>
+                    _logger.LogInformation($"Entity: {entityName?.ToString()}, Operation: {operation?.ToString()}");
+
+                    if (entityName == "task" && operation == "Create")
                     {
-                        Value = task.Subject
-                    });
+                        Entity target = (Entity)remoteExecutionContext.InputParameters["Target"];
+                        var task = target.ToEntity<Model.Task>();
 
-                    _producer.Flush();
+                        var result = await _producer.ProduceAsync(_topic, new Message<String, String>
+                        {
+                            Value = task.Subject
+                        });
 
-                    return new OkObjectResult(result);
+                        _producer.Flush();
+
+                        return new OkObjectResult(result);
+                    }
                 }
+
+                return new ObjectResult("An internal error occurred.")
+                {
+                    StatusCode = StatusCodes.Status500InternalServerError
+                };
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred.");
+
+                return new ObjectResult("An internal error occurred.")
+                {
+                    StatusCode = StatusCodes.Status500InternalServerError
+                };
             }
 
-            return new ObjectResult("An internal error occurred.")
-            {
-                StatusCode = StatusCodes.Status500InternalServerError
-            };
         }
     }
 }

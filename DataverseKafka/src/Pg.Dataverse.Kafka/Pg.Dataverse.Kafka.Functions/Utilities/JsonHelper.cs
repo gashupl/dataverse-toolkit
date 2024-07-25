@@ -33,14 +33,20 @@ namespace Pg.Dataverse.Kafka.Functions.Utilities
 
                     if (serializer != null)
                     {
-                        instance = (T?)serializer?.ReadObject(ms);
-                        ms.Close();
-
+                        try
+                        {
+                            instance = (T?)serializer?.ReadObject(ms);
+                            ms.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            throw new Exception(ex.Message);
+                        }
                     }
-                }
+                }            
             }
-
             return instance;
+
         }
     }
 }
