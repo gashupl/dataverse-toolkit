@@ -10,6 +10,7 @@ var host = new HostBuilder()
     {
         services.AddApplicationInsightsTelemetryWorkerService();
         services.ConfigureFunctionsApplicationInsights();
+
         services.Configure<ProducerConfig>(context.Configuration.GetSection("Kafka"));
         services.AddSingleton<IProducer<String, String>>(sp =>
         {
@@ -18,6 +19,16 @@ var host = new HostBuilder()
             return new ProducerBuilder<String, String>(config.Value)
                 .Build();
         });
+
+        services.Configure<ConsumerConfig>(context.Configuration.GetSection("Kafka"));
+        services.AddSingleton<IConsumer<String, String>>(sp =>
+        {
+            var config = sp.GetRequiredService<IOptions<ConsumerConfig>>();
+
+            return new ConsumerBuilder<String, String>(config.Value)
+                .Build();
+        });
+
     })
     .Build();
 
