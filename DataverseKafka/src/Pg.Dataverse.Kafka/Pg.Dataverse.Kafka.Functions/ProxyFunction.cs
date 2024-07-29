@@ -11,13 +11,14 @@ namespace Pg.Dataverse.Kafka.Functions
     public class ProxyFunction
     {
         private const string _topic = "dataverse-task-topic";
+        private const string _expectedHeaderKey = "DataverseWebHookKey"; 
         private readonly IProducer<String, String> _producer;
         private readonly ILogger<ProxyFunction> _logger;
 
         public ProxyFunction(IProducer<String, String> producer, ILogger<ProxyFunction> logger)
         {
             _producer = producer;
-            _logger = logger;
+            _logger = logger; 
         }
 
         [Function("ProxyFunction")]
@@ -25,7 +26,21 @@ namespace Pg.Dataverse.Kafka.Functions
         {
             try
             {
-                _logger.LogInformation("Received a webhook call from Dataverse.");
+                _logger.LogInformation("Received a webhook call from Dataverse. Trying to authenticate");
+
+                string? expected = Environment.GetEnvironmentVariable(_expectedHeaderKey); 
+                string? actual = req.Headers.ContainsKey(_expectedHeaderKey) 
+                    ? (string?)req.Headers[_expectedHeaderKey] : String.Empty;
+
+                if (!AuthHelper.IsAuthenticated(expected, actual))
+                {
+                    return new ObjectResult("Authentication problem")
+                    {
+                        StatusCode = StatusCodes.Status401Unauthorized
+                    }; 
+                }
+
+                _logger.LogInformation("Authentication sucessfull. Processing request...");
 
                 string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
                 string jsonContext = JsonHelper.FormatJson(requestBody);
