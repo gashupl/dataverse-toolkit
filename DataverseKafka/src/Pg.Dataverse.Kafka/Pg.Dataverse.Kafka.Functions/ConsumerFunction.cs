@@ -17,16 +17,13 @@ namespace Pg.Dataverse.Kafka.Functions
         }
 
         [Function("ConsumerFunction")]
-       // [Singleton(Mode = SingletonMode.Function)]
         public void Run([TimerTrigger("0 * * * * *", RunOnStartup = true)] TimerInfo myTimer)
         {
             _logger.LogInformation($"C# Timer trigger consumer function executed at: {DateTime.Now}");
 
             _consumer.Subscribe(_topic);
-           // int counter = 0; 
             while (true)
             {
-               // _logger.LogInformation($"Counter: {++counter} ");
                 var result = _consumer.Consume();
                 _logger.LogInformation($"Result: {result.Message.Value} ");
                 Thread.Sleep(1000);
