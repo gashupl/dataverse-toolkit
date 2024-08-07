@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Pg.Dataverse.Model
+namespace Pg.Dataverse.Model.OptionSets
 {
 	
 	

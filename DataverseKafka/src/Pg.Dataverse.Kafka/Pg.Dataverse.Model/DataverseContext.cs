@@ -31,33 +31,33 @@ namespace Pg.Dataverse.Model
 		/// <summary>
 		/// Gets a binding to the set of all <see cref="Pg.Dataverse.Model.EnvironmentVariableDefinition"/> entities.
 		/// </summary>
-		public System.Linq.IQueryable<Pg.Dataverse.Model.EnvironmentVariableDefinition> EnvironmentVariableDefinitionSet
+		public System.Linq.IQueryable<Pg.Dataverse.Model.Entities.EnvironmentVariableDefinition> EnvironmentVariableDefinitionSet
 		{
 			get
 			{
-				return this.CreateQuery<Pg.Dataverse.Model.EnvironmentVariableDefinition>();
+				return this.CreateQuery<Pg.Dataverse.Model.Entities.EnvironmentVariableDefinition>();
 			}
 		}
 		
 		/// <summary>
 		/// Gets a binding to the set of all <see cref="Pg.Dataverse.Model.EnvironmentVariableValue"/> entities.
 		/// </summary>
-		public System.Linq.IQueryable<Pg.Dataverse.Model.EnvironmentVariableValue> EnvironmentVariableValueSet
+		public System.Linq.IQueryable<Pg.Dataverse.Model.Entities.EnvironmentVariableValue> EnvironmentVariableValueSet
 		{
 			get
 			{
-				return this.CreateQuery<Pg.Dataverse.Model.EnvironmentVariableValue>();
+				return this.CreateQuery<Pg.Dataverse.Model.Entities.EnvironmentVariableValue>();
 			}
 		}
 		
 		/// <summary>
 		/// Gets a binding to the set of all <see cref="Pg.Dataverse.Model.Task"/> entities.
 		/// </summary>
-		public System.Linq.IQueryable<Pg.Dataverse.Model.Task> TaskSet
+		public System.Linq.IQueryable<Pg.Dataverse.Model.Entities.Task> TaskSet
 		{
 			get
 			{
-				return this.CreateQuery<Pg.Dataverse.Model.Task>();
+				return this.CreateQuery<Pg.Dataverse.Model.Entities.Task>();
 			}
 		}
 	}

@@ -57,7 +57,7 @@ namespace Pg.Dataverse.Kafka.Functions
                     if (entityName == "task" && operation == "Create")
                     {
                         Entity target = (Entity)remoteExecutionContext.InputParameters["Target"];
-                        var task = target.ToEntity<Model.Task>();
+                        var task = target.ToEntity<Model.Entities.Task>();
 
                         var result = await _producer.ProduceAsync(_topic, new Message<String, String>
                         {

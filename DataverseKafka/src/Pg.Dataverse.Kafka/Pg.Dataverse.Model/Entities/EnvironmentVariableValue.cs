@@ -8,7 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Pg.Dataverse.Model
+using Pg.Dataverse.Model.OptionSets;
+
+namespace Pg.Dataverse.Model.Entities
 {
 	
 	
@@ -889,17 +891,17 @@ namespace Pg.Dataverse.Model
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("environmentvariabledefinitionid")]
 		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("environmentvariabledefinition_environmentvariablevalue")]
-		public Pg.Dataverse.Model.EnvironmentVariableDefinition EnvironmentVariableDefinition_EnvironmentVariableValue
+		public Pg.Dataverse.Model.Entities.EnvironmentVariableDefinition EnvironmentVariableDefinition_EnvironmentVariableValue
 		{
 			[System.Diagnostics.DebuggerNonUserCode()]
 			get
 			{
-				return this.GetRelatedEntity<Pg.Dataverse.Model.EnvironmentVariableDefinition>("environmentvariabledefinition_environmentvariablevalue", null);
+				return this.GetRelatedEntity<Pg.Dataverse.Model.Entities.EnvironmentVariableDefinition>("environmentvariabledefinition_environmentvariablevalue", null);
 			}
 			[System.Diagnostics.DebuggerNonUserCode()]
 			set
 			{
-				this.SetRelatedEntity<Pg.Dataverse.Model.EnvironmentVariableDefinition>("environmentvariabledefinition_environmentvariablevalue", null, value);
+				this.SetRelatedEntity<Pg.Dataverse.Model.Entities.EnvironmentVariableDefinition>("environmentvariabledefinition_environmentvariablevalue", null, value);
 			}
 		}
 		
