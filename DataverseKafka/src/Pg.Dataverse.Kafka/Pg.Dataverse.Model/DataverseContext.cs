@@ -10,7 +10,7 @@
 
 [assembly: Microsoft.Xrm.Sdk.Client.ProxyTypesAssemblyAttribute()]
 
-namespace Pg.Dataverse.Kafka.Functions.Model
+namespace Pg.Dataverse.Model
 {
 	
 	
@@ -29,35 +29,35 @@ namespace Pg.Dataverse.Kafka.Functions.Model
 		}
 		
 		/// <summary>
-		/// Gets a binding to the set of all <see cref="Pg.Dataverse.Kafka.Functions.Model.EnvironmentVariableDefinition"/> entities.
+		/// Gets a binding to the set of all <see cref="Pg.Dataverse.Model.EnvironmentVariableDefinition"/> entities.
 		/// </summary>
-		public System.Linq.IQueryable<Pg.Dataverse.Kafka.Functions.Model.EnvironmentVariableDefinition> EnvironmentVariableDefinitionSet
+		public System.Linq.IQueryable<Pg.Dataverse.Model.EnvironmentVariableDefinition> EnvironmentVariableDefinitionSet
 		{
 			get
 			{
-				return this.CreateQuery<Pg.Dataverse.Kafka.Functions.Model.EnvironmentVariableDefinition>();
+				return this.CreateQuery<Pg.Dataverse.Model.EnvironmentVariableDefinition>();
 			}
 		}
 		
 		/// <summary>
-		/// Gets a binding to the set of all <see cref="Pg.Dataverse.Kafka.Functions.Model.EnvironmentVariableValue"/> entities.
+		/// Gets a binding to the set of all <see cref="Pg.Dataverse.Model.EnvironmentVariableValue"/> entities.
 		/// </summary>
-		public System.Linq.IQueryable<Pg.Dataverse.Kafka.Functions.Model.EnvironmentVariableValue> EnvironmentVariableValueSet
+		public System.Linq.IQueryable<Pg.Dataverse.Model.EnvironmentVariableValue> EnvironmentVariableValueSet
 		{
 			get
 			{
-				return this.CreateQuery<Pg.Dataverse.Kafka.Functions.Model.EnvironmentVariableValue>();
+				return this.CreateQuery<Pg.Dataverse.Model.EnvironmentVariableValue>();
 			}
 		}
 		
 		/// <summary>
-		/// Gets a binding to the set of all <see cref="Pg.Dataverse.Kafka.Functions.Model.Task"/> entities.
+		/// Gets a binding to the set of all <see cref="Pg.Dataverse.Model.Task"/> entities.
 		/// </summary>
-		public System.Linq.IQueryable<Pg.Dataverse.Kafka.Functions.Model.Task> TaskSet
+		public System.Linq.IQueryable<Pg.Dataverse.Model.Task> TaskSet
 		{
 			get
 			{
-				return this.CreateQuery<Pg.Dataverse.Kafka.Functions.Model.Task>();
+				return this.CreateQuery<Pg.Dataverse.Model.Task>();
 			}
 		}
 	}

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Pg.Dataverse.Kafka.Functions.Model
+namespace Pg.Dataverse.Model
 {
 	
 	
@@ -1175,17 +1175,17 @@ namespace Pg.Dataverse.Kafka.Functions.Model
 		/// 1:N envdefinition_envdefinition
 		/// </summary>
 		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("envdefinition_envdefinition", Microsoft.Xrm.Sdk.EntityRole.Referenced)]
-		public System.Collections.Generic.IEnumerable<Pg.Dataverse.Kafka.Functions.Model.EnvironmentVariableDefinition> ReferenceDeNvDefinition_ENvDefinition
+		public System.Collections.Generic.IEnumerable<Pg.Dataverse.Model.EnvironmentVariableDefinition> ReferenceDeNvDefinition_ENvDefinition
 		{
 			[System.Diagnostics.DebuggerNonUserCode()]
 			get
 			{
-				return this.GetRelatedEntities<Pg.Dataverse.Kafka.Functions.Model.EnvironmentVariableDefinition>("envdefinition_envdefinition", Microsoft.Xrm.Sdk.EntityRole.Referenced);
+				return this.GetRelatedEntities<Pg.Dataverse.Model.EnvironmentVariableDefinition>("envdefinition_envdefinition", Microsoft.Xrm.Sdk.EntityRole.Referenced);
 			}
 			[System.Diagnostics.DebuggerNonUserCode()]
 			set
 			{
-				this.SetRelatedEntities<Pg.Dataverse.Kafka.Functions.Model.EnvironmentVariableDefinition>("envdefinition_envdefinition", Microsoft.Xrm.Sdk.EntityRole.Referenced, value);
+				this.SetRelatedEntities<Pg.Dataverse.Model.EnvironmentVariableDefinition>("envdefinition_envdefinition", Microsoft.Xrm.Sdk.EntityRole.Referenced, value);
 			}
 		}
 		
@@ -1193,17 +1193,17 @@ namespace Pg.Dataverse.Kafka.Functions.Model
 		/// 1:N environmentvariabledefinition_environmentvariablevalue
 		/// </summary>
 		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("environmentvariabledefinition_environmentvariablevalue")]
-		public System.Collections.Generic.IEnumerable<Pg.Dataverse.Kafka.Functions.Model.EnvironmentVariableValue> EnvironmentVariableDefinition_EnvironmentVariableValue
+		public System.Collections.Generic.IEnumerable<Pg.Dataverse.Model.EnvironmentVariableValue> EnvironmentVariableDefinition_EnvironmentVariableValue
 		{
 			[System.Diagnostics.DebuggerNonUserCode()]
 			get
 			{
-				return this.GetRelatedEntities<Pg.Dataverse.Kafka.Functions.Model.EnvironmentVariableValue>("environmentvariabledefinition_environmentvariablevalue", null);
+				return this.GetRelatedEntities<Pg.Dataverse.Model.EnvironmentVariableValue>("environmentvariabledefinition_environmentvariablevalue", null);
 			}
 			[System.Diagnostics.DebuggerNonUserCode()]
 			set
 			{
-				this.SetRelatedEntities<Pg.Dataverse.Kafka.Functions.Model.EnvironmentVariableValue>("environmentvariabledefinition_environmentvariablevalue", null, value);
+				this.SetRelatedEntities<Pg.Dataverse.Model.EnvironmentVariableValue>("environmentvariabledefinition_environmentvariablevalue", null, value);
 			}
 		}
 		
@@ -1212,17 +1212,17 @@ namespace Pg.Dataverse.Kafka.Functions.Model
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("parentdefinitionid")]
 		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("envdefinition_envdefinition", Microsoft.Xrm.Sdk.EntityRole.Referencing)]
-		public Pg.Dataverse.Kafka.Functions.Model.EnvironmentVariableDefinition ReferencingENvDefinition_ENvDefinition
+		public Pg.Dataverse.Model.EnvironmentVariableDefinition ReferencingENvDefinition_ENvDefinition
 		{
 			[System.Diagnostics.DebuggerNonUserCode()]
 			get
 			{
-				return this.GetRelatedEntity<Pg.Dataverse.Kafka.Functions.Model.EnvironmentVariableDefinition>("envdefinition_envdefinition", Microsoft.Xrm.Sdk.EntityRole.Referencing);
+				return this.GetRelatedEntity<Pg.Dataverse.Model.EnvironmentVariableDefinition>("envdefinition_envdefinition", Microsoft.Xrm.Sdk.EntityRole.Referencing);
 			}
 			[System.Diagnostics.DebuggerNonUserCode()]
 			set
 			{
-				this.SetRelatedEntity<Pg.Dataverse.Kafka.Functions.Model.EnvironmentVariableDefinition>("envdefinition_envdefinition", Microsoft.Xrm.Sdk.EntityRole.Referencing, value);
+				this.SetRelatedEntity<Pg.Dataverse.Model.EnvironmentVariableDefinition>("envdefinition_envdefinition", Microsoft.Xrm.Sdk.EntityRole.Referencing, value);
 			}
 		}
 		

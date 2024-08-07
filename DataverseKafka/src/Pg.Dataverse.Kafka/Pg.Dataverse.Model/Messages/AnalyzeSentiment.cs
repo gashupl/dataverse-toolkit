@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Pg.Dataverse.Kafka.Functions.Model
+namespace Pg.Dataverse.Model
 {
 	
 	

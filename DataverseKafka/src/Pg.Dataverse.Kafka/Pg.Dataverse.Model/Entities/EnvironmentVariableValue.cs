@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Pg.Dataverse.Kafka.Functions.Model
+namespace Pg.Dataverse.Model
 {
 	
 	
@@ -889,17 +889,17 @@ namespace Pg.Dataverse.Kafka.Functions.Model
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("environmentvariabledefinitionid")]
 		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("environmentvariabledefinition_environmentvariablevalue")]
-		public Pg.Dataverse.Kafka.Functions.Model.EnvironmentVariableDefinition EnvironmentVariableDefinition_EnvironmentVariableValue
+		public Pg.Dataverse.Model.EnvironmentVariableDefinition EnvironmentVariableDefinition_EnvironmentVariableValue
 		{
 			[System.Diagnostics.DebuggerNonUserCode()]
 			get
 			{
-				return this.GetRelatedEntity<Pg.Dataverse.Kafka.Functions.Model.EnvironmentVariableDefinition>("environmentvariabledefinition_environmentvariablevalue", null);
+				return this.GetRelatedEntity<Pg.Dataverse.Model.EnvironmentVariableDefinition>("environmentvariabledefinition_environmentvariablevalue", null);
 			}
 			[System.Diagnostics.DebuggerNonUserCode()]
 			set
 			{
-				this.SetRelatedEntity<Pg.Dataverse.Kafka.Functions.Model.EnvironmentVariableDefinition>("environmentvariabledefinition_environmentvariablevalue", null, value);
+				this.SetRelatedEntity<Pg.Dataverse.Model.EnvironmentVariableDefinition>("environmentvariabledefinition_environmentvariablevalue", null, value);
 			}
 		}
 		

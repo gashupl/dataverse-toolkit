@@ -5,6 +5,10 @@ VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pg.Dataverse.Kafka.Functions", "Pg.Dataverse.Kafka.Functions\Pg.Dataverse.Kafka.Functions.csproj", "{A5AFC5AD-6FB6-4600-8B1E-E9A7966FC6AF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pg.Dataverse.Kafka.Data", "Pg.Dataverse.Kafka.Data\Pg.Dataverse.Kafka.Data.csproj", "{2E92858E-8FB0-4141-892C-BF0AAFE33CF0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pg.Dataverse.Model", "Pg.Dataverse.Model\Pg.Dataverse.Model.csproj", "{107EE5D5-A0D0-4CB4-ADAF-156C693CFA59}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{A5AFC5AD-6FB6-4600-8B1E-E9A7966FC6AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5AFC5AD-6FB6-4600-8B1E-E9A7966FC6AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5AFC5AD-6FB6-4600-8B1E-E9A7966FC6AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E92858E-8FB0-4141-892C-BF0AAFE33CF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E92858E-8FB0-4141-892C-BF0AAFE33CF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E92858E-8FB0-4141-892C-BF0AAFE33CF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E92858E-8FB0-4141-892C-BF0AAFE33CF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{107EE5D5-A0D0-4CB4-ADAF-156C693CFA59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{107EE5D5-A0D0-4CB4-ADAF-156C693CFA59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{107EE5D5-A0D0-4CB4-ADAF-156C693CFA59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{107EE5D5-A0D0-4CB4-ADAF-156C693CFA59}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
