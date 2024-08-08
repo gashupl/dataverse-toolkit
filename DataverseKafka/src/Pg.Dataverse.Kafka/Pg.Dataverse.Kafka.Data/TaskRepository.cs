@@ -20,12 +20,9 @@ namespace Pg.Dataverse.Kafka.Data
 
         public Guid Create(string subject)
         {
-            // Create a new task entity
             var task = new Model.Entities.Task();
             task.Subject = subject;
-
             Guid taskId = _serviceClient.Create(task);
-
             return taskId;
         }
     }
