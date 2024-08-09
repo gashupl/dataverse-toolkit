@@ -10,12 +10,14 @@ var configuration = new ConfigurationBuilder()
     .AddCommandLine(args)
     .Build();
 
-var baseUrl = Environment.GetEnvironmentVariable("app-settings:crm-base-url");
-var clientId = Environment.GetEnvironmentVariable("app-settings:crm-application-id");
-var clientSecret = Environment.GetEnvironmentVariable("app-settings:crm-client-secret"); 
+var baseUrl = configuration["app-settings:crm-base-url"];
+var clientId = configuration["app-settings:crm-application-id"];
+var clientSecret = configuration["app-settings:crm-client-secret"]; 
 
 var connectionString = @$"Url={baseUrl};AuthType=ClientSecret;"
         + $"ClientId={clientId};ClientSecret={clientSecret};RequireNewInstance=true"; 
 
 var repo = new TaskRepository(connectionString);
-repo.Create("Hello from command line!"); 
+repo.Create(StringRandomizer.Generate(20));
+
+//TODO: Implement multithreaded task creation, sample code: https://markcarrington.dev/2020/12/04/improving-insert-update-delete-performance-in-d365-dataverse/
