@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xrm.Sdk.Messages;
 
 namespace Pg.Dataverse.Kafka.Data
 {
@@ -24,6 +25,45 @@ namespace Pg.Dataverse.Kafka.Data
             task.Subject = subject;
             Guid taskId = _serviceClient.Create(task);
             return taskId;
+        }
+
+        public void CreateMultiple(List<string> subjects, int maxRequestsPerBatch)
+        {
+            var tasks = subjects.Select(s => new Model.Entities.Task { Subject = s }).ToList();
+
+            Parallel.ForEach(tasks,
+                  new ParallelOptions { MaxDegreeOfParallelism = 10 },
+                  () => new
+                  {
+                      Service = _serviceClient.Clone(),
+                      EMR = new ExecuteMultipleRequest
+                      {
+                          Requests = new OrganizationRequestCollection(),
+                          Settings = new ExecuteMultipleSettings
+                          {
+                              ContinueOnError = false,
+                              ReturnResponses = false
+                          }
+                      }
+                  },
+                  (entity, loopState, index, threadLocalState) =>
+                  {
+                      threadLocalState.EMR.Requests.Add(new UpdateRequest { Target = entity });
+                      if (threadLocalState.EMR.Requests.Count == maxRequestsPerBatch)
+                      {
+                          threadLocalState.Service.Execute(threadLocalState.EMR);
+                          threadLocalState.EMR.Requests.Clear();
+                      }
+                      return threadLocalState;
+                  },
+                  (threadLocalState) =>
+                  {
+                      if (threadLocalState.EMR.Requests.Count > 0)
+                      {
+                          threadLocalState.Service.Execute(threadLocalState.EMR);
+                      }
+                      threadLocalState.Service.Dispose();
+                  });
         }
     }
 }
