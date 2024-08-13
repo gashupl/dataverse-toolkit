@@ -27,7 +27,7 @@ namespace Pg.Dataverse.Kafka.Data
             return taskId;
         }
 
-        public void CreateMultiple(List<string> subjects, int maxRequestsPerBatch)
+        public void CreateMultiple(List<string> subjects, int maxDegreeOfParallelism, int maxRequestsPerBatch)
         {
             var tasks = subjects.Select(s => new Model.Entities.Task { Subject = s }).ToList();
 
@@ -36,7 +36,7 @@ namespace Pg.Dataverse.Kafka.Data
                   () => new
                   {
                       Service = _serviceClient.Clone(),
-                      EMR = new ExecuteMultipleRequest
+                      ExecuteMultipleRequest = new ExecuteMultipleRequest
                       {
                           Requests = new OrganizationRequestCollection(),
                           Settings = new ExecuteMultipleSettings
@@ -48,19 +48,19 @@ namespace Pg.Dataverse.Kafka.Data
                   },
                   (entity, loopState, index, threadLocalState) =>
                   {
-                      threadLocalState.EMR.Requests.Add(new UpdateRequest { Target = entity });
-                      if (threadLocalState.EMR.Requests.Count == maxRequestsPerBatch)
+                      threadLocalState.ExecuteMultipleRequest.Requests.Add(new UpdateRequest { Target = entity });
+                      if (threadLocalState.ExecuteMultipleRequest.Requests.Count == maxRequestsPerBatch)
                       {
-                          threadLocalState.Service.Execute(threadLocalState.EMR);
-                          threadLocalState.EMR.Requests.Clear();
+                          threadLocalState.Service.Execute(threadLocalState.ExecuteMultipleRequest);
+                          threadLocalState.ExecuteMultipleRequest.Requests.Clear();
                       }
                       return threadLocalState;
                   },
                   (threadLocalState) =>
                   {
-                      if (threadLocalState.EMR.Requests.Count > 0)
+                      if (threadLocalState.ExecuteMultipleRequest.Requests.Count > 0)
                       {
-                          threadLocalState.Service.Execute(threadLocalState.EMR);
+                          threadLocalState.Service.Execute(threadLocalState.ExecuteMultipleRequest);
                       }
                       threadLocalState.Service.Dispose();
                   });
