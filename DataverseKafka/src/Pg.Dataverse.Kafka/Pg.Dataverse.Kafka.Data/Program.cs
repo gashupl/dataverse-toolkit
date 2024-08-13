@@ -13,13 +13,15 @@ var configuration = new ConfigurationBuilder()
 var baseUrl = configuration["app-settings:crm-base-url"];
 var clientId = configuration["app-settings:crm-application-id"];
 var clientSecret = configuration["app-settings:crm-client-secret"];
-var tasksNumber = configuration["app-settings:tasks-number"];
-var maxDegreeOfParallelism = 10; 
+var tasksNumberConfig = configuration["app-settings:tasks-number"];
+var maxDegreeOfParallelismConfig = configuration["app-settings:max-parallelism-degree"];
+
 
 var connectionString = @$"Url={baseUrl};AuthType=ClientSecret;"
         + $"ClientId={clientId};ClientSecret={clientSecret};RequireNewInstance=true"; 
 
-if(Int32.TryParse(tasksNumber, out int tasksCount))
+if(Int32.TryParse(tasksNumberConfig, out int tasksCount) 
+    && Int32.TryParse(maxDegreeOfParallelismConfig, out int maxDegreeOfParallelism))
 {
     var repo = new TaskRepository(connectionString);
 
