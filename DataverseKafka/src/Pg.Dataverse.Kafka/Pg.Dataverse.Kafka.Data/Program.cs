@@ -36,5 +36,5 @@ if(Int32.TryParse(tasksNumberConfig, out int tasksCount)
 }
 else
 {
-    Console.WriteLine("Invalid tasks number");
+    Console.WriteLine("Invalid configuration parameters");
 }

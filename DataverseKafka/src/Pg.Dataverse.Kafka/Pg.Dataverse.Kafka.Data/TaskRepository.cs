@@ -42,16 +42,18 @@ namespace Pg.Dataverse.Kafka.Data
                           Settings = new ExecuteMultipleSettings
                           {
                               ContinueOnError = false,
-                              ReturnResponses = false
+                              ReturnResponses = true
                           }
                       }
                   },
                   (entity, loopState, index, threadLocalState) =>
                   {
-                      threadLocalState.ExecuteMultipleRequest.Requests.Add(new UpdateRequest { Target = entity });
+                      threadLocalState.ExecuteMultipleRequest.Requests.Add(new CreateRequest { Target = entity });
                       if (threadLocalState.ExecuteMultipleRequest.Requests.Count == maxRequestsPerBatch)
                       {
-                          threadLocalState.Service.Execute(threadLocalState.ExecuteMultipleRequest);
+                          var response = 
+                            (ExecuteMultipleResponse)threadLocalState.Service.Execute(threadLocalState.ExecuteMultipleRequest);
+                          HandleExecuteMultipleResponse(response); 
                           threadLocalState.ExecuteMultipleRequest.Requests.Clear();
                       }
                       return threadLocalState;
@@ -60,10 +62,29 @@ namespace Pg.Dataverse.Kafka.Data
                   {
                       if (threadLocalState.ExecuteMultipleRequest.Requests.Count > 0)
                       {
-                          threadLocalState.Service.Execute(threadLocalState.ExecuteMultipleRequest);
+                          var response = 
+                            (ExecuteMultipleResponse)threadLocalState.Service.Execute(threadLocalState.ExecuteMultipleRequest);
+                          HandleExecuteMultipleResponse(response);
                       }
                       threadLocalState.Service.Dispose();
                   });
+        }
+
+        private void HandleExecuteMultipleResponse(ExecuteMultipleResponse response)
+        {
+            foreach (var responseItem in response.Responses)
+            {
+                if (responseItem.Fault != null)
+                {
+                    // Handle faulted response
+                    Console.WriteLine($"Error: {responseItem.Fault.Message}");
+                }
+                else
+                {
+                    // Handle successful response
+                    Console.WriteLine("Request succeeded.");
+                }
+            }
         }
     }
 }
