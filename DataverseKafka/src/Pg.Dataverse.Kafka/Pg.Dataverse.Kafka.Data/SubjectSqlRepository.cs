@@ -2,7 +2,7 @@
 
 namespace Pg.Dataverse.Kafka.Data
 {
-    public class SubjectSqlRepository
+    public class SubjectSqlRepository : ISubjectRepository
     {
         private readonly string _connectionString;
 
@@ -11,21 +11,17 @@ namespace Pg.Dataverse.Kafka.Data
             _connectionString = connectionString;
         }
 
-        public int InsertSubject(string subjectName)
+        public void InsertSubject(string subjectName)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
 
                 using (SqlCommand command
-                    = new SqlCommand("INSERT INTO Subjects (SubjectText) OUTPUT INSERTED.Id VALUES (@SubjectText)", connection))
+                    = new SqlCommand("INSERT INTO Subjects (SubjectText)what VALUES (@SubjectText)", connection))
                 {
                     command.Parameters.AddWithValue("@SubjectText", subjectName);
-
-                    // Execute the command and get the inserted ID
-                    int insertedId = (int)command.ExecuteScalar();
-                    return insertedId;
-
+                    command.ExecuteScalar(); 
                 }
             }
         }

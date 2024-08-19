@@ -1,6 +1,6 @@
 ﻿namespace Pg.Dataverse.Kafka.Data
 {
-    public class SubjectFileRepository
+    public class SubjectFileRepository : ISubjectRepository
     {
         private readonly string _filePath;
 
@@ -9,7 +9,7 @@
             _filePath = filePath;
         }
 
-        public void AddLine(string text)
+        public void InsertSubject(string text)
         {
             // Append the text to the file, followed by a newline character
             File.AppendAllText(_filePath, text + Environment.NewLine);
