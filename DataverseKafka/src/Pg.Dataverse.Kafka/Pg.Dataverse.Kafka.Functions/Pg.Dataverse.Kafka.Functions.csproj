@@ -36,6 +36,7 @@
     <Folder Include="Properties\ServiceDependencies\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Pg.Dataverse.Kafka.Data\Pg.Dataverse.Kafka.Data.csproj" />
     <ProjectReference Include="..\Pg.Dataverse.Model\Pg.Dataverse.Model.csproj" />
   </ItemGroup>
 </Project>

@@ -1,18 +1,22 @@
 using Confluent.Kafka;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
+using Pg.Dataverse.Kafka.Data;
 
 namespace Pg.Dataverse.Kafka.Functions
 {
     public class ConsumerFunction
     {
         private const string _topic = "dataverse-task-topic";
+        private readonly ISubjectRepository _subjectsRepository;
         private readonly IConsumer<String, String> _consumer;
         private readonly ILogger _logger;
 
-        public ConsumerFunction(IConsumer<String, String> consumer, ILoggerFactory loggerFactory)
+        public ConsumerFunction
+            (IConsumer<String, String> consumer, ISubjectRepository subjectsRepository, ILoggerFactory loggerFactory)
         {
             _consumer = consumer;
+            _subjectsRepository = subjectsRepository;
             _logger = loggerFactory.CreateLogger<ConsumerFunction>();
         }
 
@@ -25,7 +29,11 @@ namespace Pg.Dataverse.Kafka.Functions
             while (true)
             {
                 var result = _consumer.Consume();
-                _logger.LogInformation($"Result: {result.Message.Value} ");
+                var subject = result.Message.Value; 
+
+                _subjectsRepository.InsertSubject(subject);
+                _logger.LogInformation($"Saved subject: {subject} ");
+
                 Thread.Sleep(1000);
             }
         }
