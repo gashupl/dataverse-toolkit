@@ -18,7 +18,7 @@ namespace Pg.Dataverse.Kafka.Data
                 connection.Open();
 
                 using (SqlCommand command
-                    = new SqlCommand("INSERT INTO Subjects (SubjectText)what VALUES (@SubjectText)", connection))
+                    = new SqlCommand("INSERT INTO Subjects (SubjectText) VALUES (@SubjectText)", connection))
                 {
                     command.Parameters.AddWithValue("@SubjectText", subjectName);
                     command.ExecuteScalar(); 
